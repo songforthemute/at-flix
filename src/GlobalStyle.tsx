@@ -35,7 +35,7 @@ const GlobalStyle = createGlobalStyle`
         font-weight: 400;
         font-family: 'Nanum Gothic', sans-serif;
         font-size: 12px;
-        /* background:linear-gradient(135deg,rgb(238, 0, 153),rgb(221, 0, 238)); */
+        background:linear-gradient(135deg,#e09,#d0e);
         color: black;
     }
     menu, ol, ul {
