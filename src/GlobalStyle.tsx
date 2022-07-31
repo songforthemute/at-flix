@@ -34,9 +34,7 @@ const GlobalStyle = createGlobalStyle`
         line-height: 1.65;
         font-weight: 400;
         font-family: 'Nanum Gothic', sans-serif;
-        font-size: 12px;
-        background:linear-gradient(135deg,#e09,#d0e);
-        color: black;
+        font-size: 13px;
     }
     menu, ol, ul {
         list-style: none;
