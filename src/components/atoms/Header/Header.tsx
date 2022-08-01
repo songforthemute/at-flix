@@ -19,7 +19,6 @@ import { useEffect, useState } from "react";
 function Header() {
     const isMatchHome = useMatch("/");
     const isMatchProgram = useMatch("program");
-    const navAnimation = useAnimation();
 
     const [searchOpen, setSearchOpen] = useState(false);
     function _onClickSearch() {
@@ -27,9 +26,10 @@ function Header() {
     }
 
     const { scrollY } = useScroll();
+    const navAnimation = useAnimation();
+
     useEffect(() => {
         scrollY.onChange(() => {
-            console.log(scrollY.get());
             if (scrollY.get() > 100) {
                 navAnimation.start("active");
             } else {
