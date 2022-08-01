@@ -31,10 +31,13 @@ const GlobalStyle = createGlobalStyle`
         display: none;
     }
     body {
-        line-height: 1.65;
-        font-weight: 400;
-        font-family: 'Nanum Gothic', sans-serif;
+        letter-spacing: 0.2px;
+        line-height: 1.4;
+        font-weight: 100;
+        font-family: 'Noto Sans KR', sans-serif;
         font-size: 13px;
+        color: ${(props) => props.theme.white.lighter};
+        background-color: black;
     }
     menu, ol, ul {
         list-style: none;
