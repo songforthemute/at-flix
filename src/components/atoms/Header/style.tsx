@@ -12,6 +12,7 @@ export const Nav = styled(motion.nav)`
     padding: 20px 60px;
     color: ${(props) => props.theme.white.lighter};
     background-color: ${(props) => props.theme.black.darkest};
+    z-index: 100;
 `;
 
 export const navVariants = {

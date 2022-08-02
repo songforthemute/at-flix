@@ -2,7 +2,15 @@ import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { getImagePath } from "../../../libs";
 import { InterfaceMovie } from "../../../server/api";
-import { Item, Row, rowVariants, Wrapper } from "./style";
+import {
+    Detail,
+    detailVariants,
+    Item,
+    itemVariants,
+    Row,
+    rowVariants,
+    Wrapper,
+} from "./style";
 
 interface InterfaceSliderProps {
     data: InterfaceMovie[];
@@ -23,6 +31,11 @@ function Slider({ data }: InterfaceSliderProps) {
         setIdx((prev) => (prev === maxIdx ? 0 : prev + 1));
     };
 
+    /**
+     * 왼쪽 클릭시 왼쪽으로 이동
+     * 오른쪽 클릭시 오른쪽으로 이동 버튼
+     */
+
     return (
         <Wrapper onClick={increaseIdx}>
             <AnimatePresence onExitComplete={toggleLeaving} initial={false}>
@@ -38,9 +51,24 @@ function Slider({ data }: InterfaceSliderProps) {
                         .map((movie) => (
                             <Item
                                 key={movie.id}
-                                bg={getImagePath(movie.backdrop_path, "w500")}
+                                variants={itemVariants}
+                                initial="initial"
+                                whileHover="hover"
                             >
-                                {movie.title}
+                                <img
+                                    src={getImagePath(
+                                        movie.backdrop_path,
+                                        "w500"
+                                    )}
+                                    alt={movie.title}
+                                />
+                                <Detail variants={detailVariants}>
+                                    <h3>{movie.title}</h3>
+                                    <p>
+                                        {movie.overview.slice(0, 100) + "..."}
+                                    </p>
+                                    {/* 평가 등 */}
+                                </Detail>
                             </Item>
                         ))}
                 </Row>

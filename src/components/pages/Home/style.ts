@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { motion } from "framer-motion";
 
 export const Wrapper = styled.div`
     background-color: black;
@@ -15,7 +14,7 @@ export const Loading = styled.div`
 `;
 
 export const Banner = styled.div<{ bg: string }>`
-    height: 100vh;
+    height: 90vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
