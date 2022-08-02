@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getImagePath } from "../../../libs";
 import { getMovies, InterfaceGetMovies } from "../../../server/api";
+import Slider from "../../atoms/Slider/Slider";
 import { Banner, Loading, Overview, Title, Wrapper } from "./style";
 
 function Home() {
@@ -9,7 +10,7 @@ function Home() {
         getMovies
     );
 
-    console.log(data, isLoading);
+    // console.log(data, isLoading);
 
     return (
         <Wrapper>
@@ -23,6 +24,7 @@ function Home() {
                         <Title>{data?.results[0].title}</Title>
                         <Overview>{data?.results[0].overview}</Overview>
                     </Banner>
+                    <Slider data={data?.results.slice(1)!} />
                 </>
             )}
         </Wrapper>

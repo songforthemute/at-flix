@@ -1,7 +1,7 @@
 const API_KEY = process.env.REACT_APP_API_KEY;
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
-interface InterfaceMovie {
+export interface InterfaceMovie {
     id: number;
     backdrop_path: string;
     poster_path: string;
@@ -28,9 +28,4 @@ export function getMovies() {
     return fetch(
         `${BASE_URL}/movie/now_playing?api_key=${API_KEY}&language=en-US&page=1&region=kr`
     ).then((response) => response.json());
-    // .then((data) => {
-    //     if (data.length === 0) {
-    //         return;
-    //     }
-    // });
 }
