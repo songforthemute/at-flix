@@ -35,6 +35,7 @@ export const rowVariants: Variants = {
 };
 
 export const Item = styled(motion.div)`
+    cursor: pointer;
     height: 100%;
     position: relative; /* relative 해제 시, width 늘어남 문제 발생! */
     color: white;

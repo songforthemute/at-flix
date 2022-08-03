@@ -9,9 +9,11 @@ function App() {
         <BrowserRouter>
             <Header />
             <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/search" element={<Search />} />
                 <Route path="/program" element={<Program />} />
+                <Route path="/search" element={<Search />} />
+                <Route path={"/"} element={<Home />}>
+                    <Route path="/program/:programId" element={<Home />} />
+                </Route>
             </Routes>
         </BrowserRouter>
     );

@@ -1,5 +1,6 @@
 import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { getImagePath } from "../../../libs";
 import { InterfaceMovie } from "../../../server/api";
 import {
@@ -24,11 +25,16 @@ function Slider({ data }: InterfaceSliderProps) {
     const maxIdx = Math.ceil(data.length / offset) - 1;
 
     const toggleLeaving = () => setLeaving((prev) => !prev);
-    const increaseIdx = () => {
+    const onIncreaseIdx = () => {
         if (leaving) return;
 
         toggleLeaving();
         setIdx((prev) => (prev === maxIdx ? 0 : prev + 1));
+    };
+
+    const navigate = useNavigate();
+    const onClickItem = (programId: number) => {
+        navigate(`/program/${programId}`);
     };
 
     /**
@@ -37,7 +43,7 @@ function Slider({ data }: InterfaceSliderProps) {
      */
 
     return (
-        <Wrapper onClick={increaseIdx}>
+        <Wrapper onClick={onIncreaseIdx}>
             <AnimatePresence onExitComplete={toggleLeaving} initial={false}>
                 <Row
                     variants={rowVariants}
@@ -48,24 +54,26 @@ function Slider({ data }: InterfaceSliderProps) {
                 >
                     {data
                         .slice(offset * idx, offset * (idx + 1))
-                        .map((movie) => (
+                        .map((program) => (
                             <Item
-                                key={movie.id}
+                                layoutId={program.id.toString()}
+                                onClick={() => onClickItem(program.id)}
+                                key={program.id}
                                 variants={itemVariants}
                                 initial="initial"
                                 whileHover="hover"
                             >
                                 <img
                                     src={getImagePath(
-                                        movie.backdrop_path,
+                                        program.backdrop_path,
                                         "w500"
                                     )}
-                                    alt={movie.title}
+                                    alt={program.title}
                                 />
                                 <Detail variants={detailVariants}>
-                                    <h3>{movie.title}</h3>
+                                    <h3>{program.title}</h3>
                                     <p>
-                                        {movie.overview.slice(0, 100) + "..."}
+                                        {program.overview.slice(0, 100) + "..."}
                                     </p>
                                     {/* 평가 등 */}
                                 </Detail>

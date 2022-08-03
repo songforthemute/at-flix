@@ -1,6 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
+import { AnimatePresence, useScroll } from "framer-motion";
+import { useMatch } from "react-router-dom";
 import { getImagePath } from "../../../libs";
 import { getMovies, InterfaceGetMovies } from "../../../server/api";
+import Modal from "../../atoms/Modal/Modal";
 import Slider from "../../atoms/Slider/Slider";
 import { Banner, Loading, Overview, Title, Wrapper } from "./style";
 
@@ -10,7 +13,14 @@ function Home() {
         getMovies
     );
 
-    // console.log(data, isLoading);
+    const clickedProgramMatch = useMatch("/program/:programId");
+    const clickedProgram = clickedProgramMatch?.params.programId
+        ? data?.results.find(
+              (v) => v.id.toString() === clickedProgramMatch.params.programId
+          )
+        : undefined;
+
+    const { scrollY } = useScroll();
 
     return (
         <Wrapper>
@@ -25,6 +35,17 @@ function Home() {
                         <Overview>{data?.results[0].overview}</Overview>
                     </Banner>
                     <Slider data={data?.results.slice(1)!} />
+                    <AnimatePresence>
+                        {clickedProgramMatch && (
+                            <Modal
+                                data={clickedProgram}
+                                scrolly={scrollY.get()}
+                                programId={
+                                    clickedProgramMatch.params.programId!
+                                }
+                            />
+                        )}
+                    </AnimatePresence>
                 </>
             )}
         </Wrapper>
