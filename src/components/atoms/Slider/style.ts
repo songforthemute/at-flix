@@ -4,6 +4,29 @@ import { motion, Variants } from "framer-motion";
 export const Wrapper = styled.div`
     top: -100px;
     position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+`;
+
+export const Button = styled.button`
+    border: none;
+    cursor: pointer;
+    padding: 10px 5px;
+    border-radius: 20px;
+    font-size: 40px;
+    font-weight: 800;
+    background-color: transparent;
+    color: white;
+    margin: 0 10px;
+    transition: all 0.25s ease-in-out;
+    &:hover,
+    &:active {
+        background-color: rgba(255, 255, 255, 0.3);
+        /* color: ${(props) => props.theme.black.darkest}; */
+        box-shadow: inset 3px 3px 10px -5px rgba(0, 0, 0, 0.9),
+            3px 3px 10px -5px rgba(0, 0, 0, 0.9);
+    }
 `;
 
 export const Row = styled(motion.div)`
@@ -11,27 +34,37 @@ export const Row = styled(motion.div)`
     grid-template-columns: repeat(6, 1fr);
     gap: 10px;
     position: absolute;
-    width: 100%;
+    width: 80vw;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
 `;
 
 export const rowVariants: Variants = {
-    initial: {
-        x: window.innerWidth + 10,
-    },
+    initial: (isStraight: boolean) => ({
+        x: isStraight ? window.innerWidth + 10 : -window.innerWidth - 10,
+        opacity: 0,
+        transition: {
+            type: "tween",
+            duration: 0.5,
+        },
+    }),
     animate: {
         x: 0,
+        opacity: 1,
         transition: {
             type: "tween",
             duration: 0.5,
         },
     },
-    exit: {
-        x: -window.innerWidth - 10,
+    exit: (isStraight: boolean) => ({
+        x: isStraight ? -window.innerWidth - 10 : window.innerWidth + 10,
+        opacity: 0,
         transition: {
             type: "tween",
             duration: 0.5,
         },
-    },
+    }),
 };
 
 export const Item = styled(motion.div)`

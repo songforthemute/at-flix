@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { getImagePath } from "../../../libs";
 import { InterfaceMovie } from "../../../server/api";
 import {
+    Button,
     Detail,
     detailVariants,
     Item,
@@ -20,6 +21,7 @@ interface InterfaceSliderProps {
 function Slider({ data }: InterfaceSliderProps) {
     const [idx, setIdx] = useState(0);
     const [leaving, setLeaving] = useState(false);
+    const [isStraight, setIsStraight] = useState(true);
 
     const offset = 6;
     const maxIdx = Math.ceil(data.length / offset) - 1;
@@ -29,7 +31,16 @@ function Slider({ data }: InterfaceSliderProps) {
         if (leaving) return;
 
         toggleLeaving();
+        setIsStraight(true);
         setIdx((prev) => (prev === maxIdx ? 0 : prev + 1));
+    };
+
+    const onDecreaseIdx = () => {
+        if (leaving) return;
+
+        toggleLeaving();
+        setIsStraight(false);
+        setIdx((prev) => (prev === 0 ? maxIdx : prev - 1));
     };
 
     const navigate = useNavigate();
@@ -37,15 +48,19 @@ function Slider({ data }: InterfaceSliderProps) {
         navigate(`/program/${programId}`);
     };
 
-    /**
-     * 왼쪽 클릭시 왼쪽으로 이동
-     * 오른쪽 클릭시 오른쪽으로 이동 버튼
-     */
+    console.log(idx);
 
     return (
-        <Wrapper onClick={onIncreaseIdx}>
+        <Wrapper>
+            <Button
+                className="material-symbols-outlined"
+                onClick={onDecreaseIdx}
+            >
+                arrow_left
+            </Button>
             <AnimatePresence onExitComplete={toggleLeaving} initial={false}>
                 <Row
+                    custom={isStraight}
                     variants={rowVariants}
                     initial="initial"
                     animate="animate"
@@ -81,6 +96,12 @@ function Slider({ data }: InterfaceSliderProps) {
                         ))}
                 </Row>
             </AnimatePresence>
+            <Button
+                className="material-symbols-outlined"
+                onClick={onIncreaseIdx}
+            >
+                arrow_right
+            </Button>
         </Wrapper>
     );
 }
