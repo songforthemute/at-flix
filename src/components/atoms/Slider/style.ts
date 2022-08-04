@@ -2,88 +2,77 @@ import styled from "styled-components";
 import { motion, Variants } from "framer-motion";
 
 export const Wrapper = styled.div`
-    top: -100px;
+    top: -150px;
     position: relative;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-`;
-
-export const Button = styled.button`
-    border: none;
-    cursor: pointer;
-    padding: 10px 5px;
-    border-radius: 20px;
-    font-size: 40px;
-    font-weight: 800;
-    background-color: transparent;
-    color: white;
-    margin: 0 10px;
-    transition: all 0.25s ease-in-out;
-    &:hover,
-    &:active {
-        background-color: rgba(255, 255, 255, 0.3);
-        /* color: ${(props) => props.theme.black.darkest}; */
-        box-shadow: inset 3px 3px 10px -5px rgba(0, 0, 0, 0.9),
-            3px 3px 10px -5px rgba(0, 0, 0, 0.9);
+    height: auto;
+    /* margin-bottom: 100px; */
+    @media screen and (max-width: 768px) {
+        top: -100px;
+    }
+    @media screen and (max-width: 425px) {
+        top: 150px;
     }
 `;
 
-export const Row = styled(motion.div)`
+export const RowTitle = styled.div`
+    margin-left: 60px;
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: 700;
+    font-style: italic;
+    text-transform: uppercase;
+    @media screen and (max-width: 425px) {
+        font-size: 16px;
+    }
+`;
+
+export const Row = styled(motion.div)<{ offset: number }>`
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 10px;
+    grid-template-columns: repeat(${(props) => props.offset}, 1fr);
+    gap: 5px;
     position: absolute;
-    width: 80vw;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
+    width: 100%;
 `;
 
 export const rowVariants: Variants = {
     initial: (isStraight: boolean) => ({
-        x: isStraight ? window.innerWidth + 10 : -window.innerWidth - 10,
-        opacity: 0,
+        x: isStraight ? window.innerWidth + 5 : -(window.innerWidth + 5),
         transition: {
-            type: "tween",
+            type: "spring",
             duration: 0.5,
         },
     }),
     animate: {
         x: 0,
-        opacity: 1,
         transition: {
-            type: "tween",
+            type: "spring",
             duration: 0.5,
         },
     },
     exit: (isStraight: boolean) => ({
-        x: isStraight ? -window.innerWidth - 10 : window.innerWidth + 10,
-        opacity: 0,
+        x: isStraight ? -(window.innerWidth + 5) : window.innerWidth + 5,
         transition: {
-            type: "tween",
+            type: "spring",
             duration: 0.5,
         },
     }),
 };
 
 export const Item = styled(motion.div)`
+    background: transparent;
     cursor: pointer;
     height: 100%;
-    position: relative; /* relative 해제 시, width 늘어남 문제 발생! */
+    /* relative 해제 시, width 늘어남 문제 발생! */
+    position: relative;
     color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    img {
+        width: 100%;
+    }
     &:last-child {
         transform-origin: center right;
     }
     &:first-child {
         transform-origin: center left;
-    }
-    img {
-        width: 100%;
-        height: auto;
     }
 `;
 
@@ -98,9 +87,9 @@ export const itemVariants: Variants = {
         },
     },
     hover: {
-        zIndex: 1,
-        scale: 1.5,
-        y: -75,
+        zIndex: 3,
+        scale: 1.35,
+        y: -50,
         transition: {
             type: "tween",
             duration: 0.5,
@@ -110,18 +99,16 @@ export const itemVariants: Variants = {
 
 export const Detail = styled(motion.div)`
     padding: 10px;
+    text-align: center;
     opacity: 0;
-    background-color: ${(props) => props.theme.black.lighter};
+    /* background-color: ${(props) => props.theme.black.lighter}; */
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
     position: absolute;
     width: 100%;
-    bottom: -35px;
+    bottom: 0;
     h3 {
-        font-size: 14px;
-        font-weight: 500;
-        margin-bottom: 5px;
-    }
-    p {
         font-size: 10px;
+        font-weight: 500;
     }
 `;
 
@@ -130,7 +117,32 @@ export const detailVariants: Variants = {
         opacity: 1,
         transition: {
             type: "tween",
-            duration: 0.5,
+            duration: 0.35,
         },
     },
 };
+
+export const Button = styled.button<{ right?: string; left?: string }>`
+    position: absolute;
+    top: -10px;
+    left: ${(props) => (props.left ? props.left : "initial")};
+    right: ${(props) => (props.right ? props.right : "initial")};
+    z-index: 2;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 50%;
+    margin: 0 5px;
+    font-size: 40px;
+    font-weight: 700;
+    background-color: transparent;
+    color: ${(props) => props.theme.black.lighter};
+    transition: all 0.35s ease-in-out;
+    &:hover,
+    &:active {
+        scale: 1.2;
+        color: ${(props) => props.theme.white.lighter};
+        box-shadow: inset 3px 3px 10px -5px rgba(255, 255, 255, 0.5),
+            3px 3px 10px -5px rgba(255, 255, 255, 0.5);
+    }
+`;

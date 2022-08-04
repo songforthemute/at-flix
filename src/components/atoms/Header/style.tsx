@@ -13,6 +13,12 @@ export const Nav = styled(motion.nav)`
     color: ${(props) => props.theme.white.lighter};
     background-color: ${(props) => props.theme.black.darkest};
     z-index: 100;
+    @media screen and (max-width: 768px) {
+        padding: 20px 40px;
+    }
+    @media screen and (max-width: 425px) {
+        padding: 20px;
+    }
 `;
 
 export const navVariants = {
@@ -38,8 +44,8 @@ export const Logo = styled(motion.svg)`
     margin-right: 20px;
     fill: ${(props) => props.theme.yellow};
     path {
-        /* stroke-width: 3px; */
-        /* stroke: white; */
+        /* stroke-width: 3px;
+        stroke: white;/ */
     }
 `;
 
@@ -71,6 +77,7 @@ export const Category = styled(motion.ul)`
 
 export const Item = styled(motion.li)`
     cursor: pointer;
+    font-weight: 500;
     margin-right: 20px;
     position: relative;
     display: flex;
@@ -83,7 +90,7 @@ export const Item = styled(motion.li)`
     }
 `;
 
-export const Dot = styled(motion.span)`
+export const UnderDot = styled(motion.span)`
     position: absolute;
     width: 5px;
     height: 5px;
@@ -95,7 +102,7 @@ export const Dot = styled(motion.span)`
     background-color: ${(props) => props.theme.yellow};
 `;
 
-export const Search = styled.span`
+export const Search = styled(motion.form)`
     fill: ${(props) => props.theme.white.lighter};
     display: flex;
     align-items: center;
@@ -107,12 +114,16 @@ export const Search = styled.span`
     }
 `;
 
-export const searchVariants: Variants = {
+// export const searchFormVariants: Variants = {
+//     initial: {},
+// };
+
+export const searchBtnVariants: Variants = {
     initial: {
         x: 0,
     },
     animate: (custom: boolean) => ({
-        x: custom ? -140 : 0,
+        x: custom ? (window.innerWidth > 375 ? -140 : -95) : 0,
         transition: {
             duration: 0.3,
             type: "linear",
@@ -132,6 +143,10 @@ export const Input = styled(motion.input)`
     background-color: transparent;
     border: 1px solid ${(props) => props.theme.white.lighter};
     border-radius: 15px;
+    @media screen and (max-width: 375px) {
+        width: 120px;
+        font-size: 8px;
+    }
 `;
 
 export const inputVariants: Variants = {

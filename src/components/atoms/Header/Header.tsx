@@ -6,10 +6,10 @@ import {
     Category,
     Item,
     logoVariants,
-    Dot,
+    UnderDot,
     Input,
     inputVariants,
-    searchVariants,
+    searchBtnVariants,
     navVariants,
 } from "./style";
 import { motion, useAnimation, useScroll } from "framer-motion";
@@ -67,13 +67,13 @@ export default function Header() {
                     <Item>
                         <Link to="/">
                             Home
-                            {isMatchHome && <Dot layoutId="dot" />}
+                            {isMatchHome && <UnderDot layoutId="dot" />}
                         </Link>
                     </Item>
                     <Item>
                         <Link to="/program">
                             Programs
-                            {isMatchProgram && <Dot layoutId="dot" />}
+                            {isMatchProgram && <UnderDot layoutId="dot" />}
                         </Link>
                     </Item>
                 </Category>
@@ -83,7 +83,7 @@ export default function Header() {
                     <motion.span
                         onClick={_onClickSearch}
                         custom={searchOpen}
-                        variants={searchVariants}
+                        variants={searchBtnVariants}
                         initial="initial"
                         animate="animate"
                         className="material-symbols-outlined"
@@ -103,9 +103,8 @@ export default function Header() {
                         placeholder="검색어를 입력해주세요."
                     />
                 </Search>
+                {/* {isMobile() && <motion.div />} */}
             </Col>
         </Nav>
     );
 }
-
-export default Header;

@@ -2,6 +2,7 @@ import { motion, Variants } from "framer-motion";
 import styled from "styled-components";
 
 export const Overlay = styled(motion.div)`
+    z-index: 99;
     position: fixed;
     width: 100%;
     height: 100%;
@@ -11,6 +12,7 @@ export const Overlay = styled(motion.div)`
 `;
 
 export const PopUp = styled(motion.div)<{ scrolly: number }>`
+    z-index: 100;
     position: absolute;
     width: 55vw;
     /* height: 60vh; */
@@ -50,9 +52,9 @@ export const Cover = styled.div<{ bg: string }>`
     background-position: center center;
     background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 1)),
         url(${(props) => props.bg});
-    height: 300px;
+    height: 400px;
     @media screen and (max-width: 768px) {
-        height: 250px;
+        height: 300px;
     }
     @media screen and (max-width: 425px) {
         height: 200px;

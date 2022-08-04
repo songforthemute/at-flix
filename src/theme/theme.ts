@@ -12,4 +12,8 @@ export const theme: DefaultTheme = {
         lighter: "#FFFFFF",
         darker: "#E5E5E5",
     },
+    padding: {
+        desktop: "60px",
+        mobile: "40px",
+    },
 };

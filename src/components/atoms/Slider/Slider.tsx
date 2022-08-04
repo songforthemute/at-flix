@@ -1,7 +1,7 @@
 import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getImagePath } from "../../../libs";
+import { getImagePath, isMobile } from "../../../libs";
 import { InterfaceMovie } from "../../../server/api";
 import {
     Button,
@@ -10,36 +10,38 @@ import {
     Item,
     itemVariants,
     Row,
+    RowTitle,
     rowVariants,
     Wrapper,
 } from "./style";
 
 interface InterfaceSliderProps {
     data: InterfaceMovie[];
+    sliderTitle: string;
 }
 
-function Slider({ data }: InterfaceSliderProps) {
+export default function Slider({ data, sliderTitle }: InterfaceSliderProps) {
     const [idx, setIdx] = useState(0);
     const [leaving, setLeaving] = useState(false);
     const [isStraight, setIsStraight] = useState(true);
 
-    const offset = 6;
+    const offset = isMobile() ? 6 : 4;
     const maxIdx = Math.ceil(data.length / offset) - 1;
 
     const toggleLeaving = () => setLeaving((prev) => !prev);
     const onIncreaseIdx = () => {
         if (leaving) return;
 
-        toggleLeaving();
         setIsStraight(true);
+        toggleLeaving();
         setIdx((prev) => (prev === maxIdx ? 0 : prev + 1));
     };
 
     const onDecreaseIdx = () => {
         if (leaving) return;
 
-        toggleLeaving();
         setIsStraight(false);
+        toggleLeaving();
         setIdx((prev) => (prev === 0 ? maxIdx : prev - 1));
     };
 
@@ -48,18 +50,26 @@ function Slider({ data }: InterfaceSliderProps) {
         navigate(`/program/${programId}`);
     };
 
-    console.log(idx);
-
     return (
         <Wrapper>
             <Button
                 className="material-symbols-outlined"
                 onClick={onDecreaseIdx}
+                left="0px"
             >
                 arrow_left
             </Button>
+            <Button
+                className="material-symbols-outlined"
+                onClick={onIncreaseIdx}
+                right="0px"
+            >
+                arrow_right
+            </Button>
+            <RowTitle>{sliderTitle}</RowTitle>
             <AnimatePresence onExitComplete={toggleLeaving} initial={false}>
                 <Row
+                    offset={offset}
                     custom={isStraight}
                     variants={rowVariants}
                     initial="initial"
@@ -80,30 +90,19 @@ function Slider({ data }: InterfaceSliderProps) {
                             >
                                 <img
                                     src={getImagePath(
-                                        program.backdrop_path,
+                                        program.backdrop_path ||
+                                            program.poster_path,
                                         "w500"
                                     )}
                                     alt={program.title}
                                 />
                                 <Detail variants={detailVariants}>
                                     <h3>{program.title}</h3>
-                                    <p>
-                                        {program.overview.slice(0, 100) + "..."}
-                                    </p>
-                                    {/* 평가 등 */}
                                 </Detail>
                             </Item>
                         ))}
                 </Row>
             </AnimatePresence>
-            <Button
-                className="material-symbols-outlined"
-                onClick={onIncreaseIdx}
-            >
-                arrow_right
-            </Button>
         </Wrapper>
     );
 }
-
-export default Slider;

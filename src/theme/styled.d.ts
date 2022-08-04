@@ -13,5 +13,9 @@ declare module "styled-components" {
             lighter: string;
             darker: string;
         };
+        padding: {
+            desktop: string;
+            mobile: string;
+        };
     }
 }
