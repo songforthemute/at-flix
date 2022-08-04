@@ -13,12 +13,23 @@ import {
     navVariants,
 } from "./style";
 import { motion, useAnimation, useScroll } from "framer-motion";
-import { Link, useMatch } from "react-router-dom";
+import { Link, useMatch, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 
-function Header() {
+interface InterfaceForm {
+    keyword: string;
+}
+
+export default function Header() {
     const isMatchHome = useMatch("/");
     const isMatchProgram = useMatch("program");
+    const navigate = useNavigate();
+
+    const { register, handleSubmit } = useForm<InterfaceForm>();
+    const onValid = (data: InterfaceForm) => {
+        navigate(`/search?keyword=${data.keyword}`);
+    };
 
     const [searchOpen, setSearchOpen] = useState(false);
     function _onClickSearch() {
@@ -68,7 +79,7 @@ function Header() {
                 </Category>
             </Col>
             <Col>
-                <Search>
+                <Search onSubmit={handleSubmit(onValid)}>
                     <motion.span
                         onClick={_onClickSearch}
                         custom={searchOpen}
@@ -80,6 +91,10 @@ function Header() {
                         search
                     </motion.span>
                     <Input
+                        {...register("keyword", {
+                            required: "2자 이상의 검색어를 입력해주세요.",
+                            minLength: 2,
+                        })}
                         type="text"
                         custom={searchOpen}
                         variants={inputVariants}
