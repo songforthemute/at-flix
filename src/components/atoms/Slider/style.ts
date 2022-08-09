@@ -61,12 +61,13 @@ export const rowVariants: Variants = {
 export const Item = styled(motion.div)`
     background: transparent;
     cursor: pointer;
-    height: 100%;
+    /* height: 100%; */
     /* relative 해제 시, width 늘어남 문제 발생! */
     position: relative;
     color: white;
     img {
         width: 100%;
+        max-height: 13vh;
     }
     &:last-child {
         transform-origin: center right;
