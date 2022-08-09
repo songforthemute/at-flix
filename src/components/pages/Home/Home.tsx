@@ -4,15 +4,13 @@ import { useMatch, useNavigate } from "react-router-dom";
 import { getImagePath } from "../../../libs";
 import {
     getNowPlayingMovies,
-    getPopularMovies,
+    getOnTheAirSeries,
     getUpcomingMovies,
     InterfaceGetMovies,
 } from "../../../apis/api";
 import Modal from "../../atoms/Modal/Modal";
 import Slider from "../../atoms/Slider/Slider";
 import { Banner, Loading, Overview, Title, Wrapper } from "./style";
-import { useRecoilValue } from "recoil";
-import { modalInfoState } from "../../../states/atoms";
 
 export default function Home() {
     const { data: nowPlaying, isLoading: isLoadingNowPlaying } =
@@ -20,17 +18,28 @@ export default function Home() {
             ["movies", "nowPlaying"],
             getNowPlayingMovies
         );
-    const { data: popular, isLoading: isLoadingPopular } =
-        useQuery<InterfaceGetMovies>(["movies", "popular"], getPopularMovies);
     const { data: upcoming, isLoading: isLoadingUpcoming } =
         useQuery<InterfaceGetMovies>(["movies", "upcoming"], getUpcomingMovies);
+    const { data: series, isLoading: isLoadingSeries } =
+        useQuery<InterfaceGetMovies>(["series", "onTheAir"], getOnTheAirSeries);
 
-    const modalInfo = useRecoilValue(modalInfoState);
+    const clickedNowPlayingMatch = useMatch("/movie/:movieId");
+    const clickedNowPlaying = clickedNowPlayingMatch?.params.movieId
+        ? nowPlaying?.results.find(
+              (v) => v.id.toString() === clickedNowPlayingMatch.params.movieId
+          )
+        : undefined;
 
-    const clickedMovieMatch = useMatch("/movie/:movieId");
-    const clickedMovie = clickedMovieMatch?.params.movieId
-        ? modalInfo.data.find(
-              (v) => v.id.toString() === clickedMovieMatch.params.movieId
+    const clickedUpcoming = clickedNowPlayingMatch?.params.movieId
+        ? upcoming?.results.find(
+              (v) => v.id.toString() === clickedNowPlayingMatch.params.movieId
+          )
+        : undefined;
+
+    const clickedSeriesMatch = useMatch("/series/:seriesId");
+    const clickedSeries = clickedSeriesMatch?.params.seriesId
+        ? series?.results.find(
+              (v) => v.id.toString() === clickedSeriesMatch.params.seriesId
           )
         : undefined;
 
@@ -61,26 +70,36 @@ export default function Home() {
                     <Slider
                         data={nowPlaying?.results.slice(1)!}
                         sliderTitle="Now Playing"
+                        type="movie"
                     />
-                    {!isLoadingPopular && (
-                        <Slider
-                            data={popular?.results!}
-                            sliderTitle="Popular"
-                        />
-                    )}
 
                     {!isLoadingUpcoming && (
                         <Slider
                             data={upcoming?.results!}
                             sliderTitle="Upcoming"
+                            type="movie"
+                        />
+                    )}
+                    {!isLoadingSeries && (
+                        <Slider
+                            data={series?.results!}
+                            sliderTitle="On Air Series"
+                            type="series"
                         />
                     )}
                     <AnimatePresence>
-                        {clickedMovieMatch && (
+                        {clickedNowPlayingMatch && (
                             <Modal
-                                data={clickedMovie}
+                                data={clickedNowPlaying || clickedUpcoming}
                                 scrolly={scrollY.get()}
-                                movidId={clickedMovieMatch.params.movieId!}
+                                movidId={clickedNowPlayingMatch.params.movieId!}
+                            />
+                        )}
+                        {clickedSeriesMatch && (
+                            <Modal
+                                data={clickedSeries}
+                                scrolly={scrollY.get()}
+                                movidId={clickedSeriesMatch.params.seriesId!}
                             />
                         )}
                     </AnimatePresence>

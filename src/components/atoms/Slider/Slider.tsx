@@ -1,7 +1,7 @@
 import { AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getImagePath, isMobile } from "../../../libs";
+import { getImagePath, isMobile, programTypes } from "../../../libs";
 import { InterfaceMovie } from "../../../apis/api";
 import {
     Button,
@@ -14,15 +14,18 @@ import {
     rowVariants,
     Wrapper,
 } from "./style";
-import { useSetRecoilState } from "recoil";
-import { modalInfoState } from "../../../states/atoms";
 
 interface InterfaceSliderProps {
     data: InterfaceMovie[];
     sliderTitle: string;
+    type: programTypes;
 }
 
-export default function Slider({ data, sliderTitle }: InterfaceSliderProps) {
+export default function Slider({
+    data,
+    sliderTitle,
+    type,
+}: InterfaceSliderProps) {
     const [idx, setIdx] = useState(0);
     const [leaving, setLeaving] = useState(false);
     const [isStraight, setIsStraight] = useState(true);
@@ -47,16 +50,9 @@ export default function Slider({ data, sliderTitle }: InterfaceSliderProps) {
         setIdx((prev) => (prev === 0 ? maxIdx : prev - 1));
     };
 
-    const setModalInfo = useSetRecoilState(modalInfoState);
-    useEffect(() => {
-        setModalInfo((current) => {
-            return { data: [...current.data, ...data] };
-        });
-    }, []);
-
     const navigate = useNavigate();
     const onClickItem = (movieId: number) => {
-        navigate(`/movie/${movieId}`);
+        navigate(`/${type}/${movieId}`);
     };
 
     return (
@@ -106,7 +102,7 @@ export default function Slider({ data, sliderTitle }: InterfaceSliderProps) {
                                     alt={movie.title}
                                 />
                                 <Detail variants={detailVariants}>
-                                    <h3>{movie.title}</h3>
+                                    <h3>{movie.title || movie.name}</h3>
                                 </Detail>
                             </Item>
                         ))}

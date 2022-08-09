@@ -11,6 +11,7 @@ export interface InterfaceMovie {
     overview: string;
     vote_average: number;
     vote_count: number;
+    name?: string;
 }
 
 export interface InterfaceGetMovies {
@@ -20,6 +21,26 @@ export interface InterfaceGetMovies {
     };
     page: number;
     results: InterfaceMovie[];
+    total_pages: number;
+    total_results: number;
+}
+
+export interface InterfaceSeries {
+    id: number;
+    name: string;
+    backdrop_path: string;
+    poster_path: string;
+    first_air_date: string;
+    origin_country: string[];
+    original_name: string;
+    overview: string;
+    vote_average: number;
+    vote_count: number;
+}
+
+export interface InterfaceGetSeries {
+    page: number;
+    results: InterfaceSeries[];
     total_pages: number;
     total_results: number;
 }
@@ -45,6 +66,12 @@ export function getUpcomingMovies() {
 export function getMovieDetail(movieId: number) {
     return fetch(
         `${BASE_URL}/movie/${movieId}?api_key=${API_KEY}&language=ko-KR`
+    ).then((response) => response.json());
+}
+
+export function getOnTheAirSeries() {
+    return fetch(
+        `${BASE_URL}/tv/on_the_air?api_key=${API_KEY}&language=ko-KR&page=1`
     ).then((response) => response.json());
 }
 

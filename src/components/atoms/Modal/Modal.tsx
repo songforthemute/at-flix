@@ -47,7 +47,7 @@ function Modal({ movidId, scrolly, data }: InterfaceModalProps) {
                     )}
                 />
                 <Container>
-                    <Title>{data?.title}</Title>
+                    <Title>{data?.title || data?.name}</Title>
                     <Overview>{data?.overview}</Overview>
                 </Container>
             </PopUp>
