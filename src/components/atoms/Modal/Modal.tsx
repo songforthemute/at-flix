@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { getImagePath } from "../../../libs";
-import { InterfaceMovie } from "../../../server/api";
+import { InterfaceMovie } from "../../../apis/api";
 import {
     Cover,
     modalVariants,
@@ -12,12 +12,12 @@ import {
 } from "./style";
 
 interface InterfaceModalProps {
-    programId: string;
+    movidId: string;
     scrolly: number;
     data?: InterfaceMovie;
 }
 
-function Modal({ programId, scrolly, data }: InterfaceModalProps) {
+function Modal({ movidId, scrolly, data }: InterfaceModalProps) {
     const navigate = useNavigate();
     function onClickOverlay() {
         navigate(-1);
@@ -34,13 +34,18 @@ function Modal({ programId, scrolly, data }: InterfaceModalProps) {
             />
             <PopUp
                 scrolly={scrolly}
-                layoutId={programId}
+                layoutId={movidId}
                 variants={modalVariants}
                 initial="initial"
                 animate="animate"
                 exit="exit"
             >
-                <Cover bg={getImagePath(data?.backdrop_path!, "w500")} />
+                <Cover
+                    bg={getImagePath(
+                        data?.backdrop_path! || data?.poster_path!,
+                        "w500"
+                    )}
+                />
                 <Container>
                     <Title>{data?.title}</Title>
                     <Overview>{data?.overview}</Overview>

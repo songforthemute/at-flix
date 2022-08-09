@@ -23,7 +23,7 @@ interface InterfaceForm {
 
 export default function Header() {
     const isMatchHome = useMatch("/");
-    const isMatchProgram = useMatch("program");
+    const isMatchSeries = useMatch("series");
     const navigate = useNavigate();
 
     const { register, handleSubmit } = useForm<InterfaceForm>();
@@ -71,9 +71,9 @@ export default function Header() {
                         </Link>
                     </Item>
                     <Item>
-                        <Link to="/program">
-                            Programs
-                            {isMatchProgram && <UnderDot layoutId="dot" />}
+                        <Link to="/series">
+                            Series
+                            {isMatchSeries && <UnderDot layoutId="dot" />}
                         </Link>
                     </Item>
                 </Category>

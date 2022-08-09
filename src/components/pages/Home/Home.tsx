@@ -39,13 +39,11 @@ export default function Home() {
                         sliderTitle="Now Playing"
                     />
                     <AnimatePresence>
-                        {clickedProgramMatch && (
+                        {clickedMovieMatch && (
                             <Modal
-                                data={clickedProgram}
+                                data={clickedMovie}
                                 scrolly={scrollY.get()}
-                                programId={
-                                    clickedProgramMatch.params.programId!
-                                }
+                                movidId={clickedMovieMatch.params.movieId!}
                             />
                         )}
                     </AnimatePresence>

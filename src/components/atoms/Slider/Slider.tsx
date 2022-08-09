@@ -46,8 +46,8 @@ export default function Slider({ data, sliderTitle }: InterfaceSliderProps) {
     };
 
     const navigate = useNavigate();
-    const onClickItem = (programId: number) => {
-        navigate(`/program/${programId}`);
+    const onClickItem = (movieId: number) => {
+        navigate(`/movie/${movieId}`);
     };
 
     return (
@@ -79,25 +79,25 @@ export default function Slider({ data, sliderTitle }: InterfaceSliderProps) {
                 >
                     {data
                         .slice(offset * idx, offset * (idx + 1))
-                        .map((program) => (
+                        .map((movie) => (
                             <Item
-                                layoutId={program.id.toString()}
-                                onClick={() => onClickItem(program.id)}
-                                key={program.id}
+                                layoutId={movie.id.toString()}
+                                onClick={() => onClickItem(movie.id)}
+                                key={movie.id}
                                 variants={itemVariants}
                                 initial="initial"
                                 whileHover="hover"
                             >
                                 <img
                                     src={getImagePath(
-                                        program.backdrop_path ||
-                                            program.poster_path,
+                                        movie.backdrop_path ||
+                                            movie.poster_path,
                                         "w500"
                                     )}
-                                    alt={program.title}
+                                    alt={movie.title}
                                 />
                                 <Detail variants={detailVariants}>
-                                    <h3>{program.title}</h3>
+                                    <h3>{movie.title}</h3>
                                 </Detail>
                             </Item>
                         ))}
