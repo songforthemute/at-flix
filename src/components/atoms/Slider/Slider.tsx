@@ -95,8 +95,8 @@ export default function Slider({
                             >
                                 <img
                                     src={getImagePath(
-                                        movie.backdrop_path ||
-                                            movie.poster_path,
+                                        movie.poster_path ||
+                                            movie.backdrop_path,
                                         "w500"
                                     )}
                                     alt={movie.title}

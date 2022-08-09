@@ -49,6 +49,8 @@ export const Overview = styled.p`
     color: ${(props) => props.theme.white.darker};
     font-size: 20px;
     font-weight: 300;
+    font-style: italic;
+    line-height: 1.65;
     @media screen and (max-width: 768px) {
         font-size: 16px;
     }

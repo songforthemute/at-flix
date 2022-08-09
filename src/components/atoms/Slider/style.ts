@@ -5,18 +5,23 @@ export const Wrapper = styled.div`
     top: -150px;
     position: relative;
     height: auto;
-    margin-bottom: 200px;
+    margin-bottom: 350px;
+    @media screen and (min-width: 1024px) {
+        margin-bottom: 500px;
+    }
     @media screen and (max-width: 768px) {
         top: -100px;
+        margin-bottom: 350px;
     }
     @media screen and (max-width: 425px) {
-        top: 150px;
+        top: 100px;
+        margin-bottom: 200px;
     }
 `;
 
 export const RowTitle = styled.div`
     margin-left: 60px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     font-size: 20px;
     font-weight: 700;
     font-style: italic;
@@ -61,13 +66,11 @@ export const rowVariants: Variants = {
 export const Item = styled(motion.div)`
     background: transparent;
     cursor: pointer;
-    /* height: 100%; */
     /* relative 해제 시, width 늘어남 문제 발생! */
     position: relative;
     color: white;
     img {
         width: 100%;
-        max-height: 13vh;
     }
     &:last-child {
         transform-origin: center right;
