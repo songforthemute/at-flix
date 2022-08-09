@@ -1,43 +1,80 @@
 import { useQuery } from "@tanstack/react-query";
 import { AnimatePresence, useScroll } from "framer-motion";
-import { useMatch } from "react-router-dom";
+import { useMatch, useNavigate } from "react-router-dom";
 import { getImagePath } from "../../../libs";
-import { getMovies, InterfaceGetMovies } from "../../../server/api";
+import {
+    getNowPlayingMovies,
+    getPopularMovies,
+    getUpcomingMovies,
+    InterfaceGetMovies,
+} from "../../../apis/api";
 import Modal from "../../atoms/Modal/Modal";
 import Slider from "../../atoms/Slider/Slider";
 import { Banner, Loading, Overview, Title, Wrapper } from "./style";
+import { useRecoilValue } from "recoil";
+import { modalInfoState } from "../../../states/atoms";
 
 export default function Home() {
-    const { data, isLoading } = useQuery<InterfaceGetMovies>(
-        ["movies", "nowPlaying"],
-        getMovies
-    );
+    const { data: nowPlaying, isLoading: isLoadingNowPlaying } =
+        useQuery<InterfaceGetMovies>(
+            ["movies", "nowPlaying"],
+            getNowPlayingMovies
+        );
+    const { data: popular, isLoading: isLoadingPopular } =
+        useQuery<InterfaceGetMovies>(["movies", "popular"], getPopularMovies);
+    const { data: upcoming, isLoading: isLoadingUpcoming } =
+        useQuery<InterfaceGetMovies>(["movies", "upcoming"], getUpcomingMovies);
 
-    const clickedProgramMatch = useMatch("/program/:programId");
-    const clickedProgram = clickedProgramMatch?.params.programId
-        ? data?.results.find(
-              (v) => v.id.toString() === clickedProgramMatch.params.programId
+    const modalInfo = useRecoilValue(modalInfoState);
+
+    const clickedMovieMatch = useMatch("/movie/:movieId");
+    const clickedMovie = clickedMovieMatch?.params.movieId
+        ? modalInfo.data.find(
+              (v) => v.id.toString() === clickedMovieMatch.params.movieId
           )
         : undefined;
 
     const { scrollY } = useScroll();
 
+    const navigate = useNavigate();
+    const moveToBanner = (movieId: string) => {
+        navigate(`/movie/${movieId}`);
+    };
+
     return (
         <Wrapper>
-            {isLoading ? (
+            {isLoadingNowPlaying ? (
                 <Loading>Loading...</Loading>
             ) : (
                 <>
                     <Banner
-                        bg={getImagePath(data?.results[0].backdrop_path || "")}
+                        onClick={() =>
+                            moveToBanner(nowPlaying?.results[0].id.toString()!)
+                        }
+                        bg={getImagePath(
+                            nowPlaying?.results[0].backdrop_path || ""
+                        )}
                     >
-                        <Title>{data?.results[0].title}</Title>
-                        <Overview>{data?.results[0].overview}</Overview>
+                        <Title>{nowPlaying?.results[0].title}</Title>
+                        <Overview>{nowPlaying?.results[0].overview}</Overview>
                     </Banner>
                     <Slider
-                        data={data?.results.slice(1)!}
+                        data={nowPlaying?.results.slice(1)!}
                         sliderTitle="Now Playing"
                     />
+                    {!isLoadingPopular && (
+                        <Slider
+                            data={popular?.results!}
+                            sliderTitle="Popular"
+                        />
+                    )}
+
+                    {!isLoadingUpcoming && (
+                        <Slider
+                            data={upcoming?.results!}
+                            sliderTitle="Upcoming"
+                        />
+                    )}
                     <AnimatePresence>
                         {clickedMovieMatch && (
                             <Modal

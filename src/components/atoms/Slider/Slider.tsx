@@ -1,8 +1,8 @@
 import { AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getImagePath, isMobile } from "../../../libs";
-import { InterfaceMovie } from "../../../server/api";
+import { InterfaceMovie } from "../../../apis/api";
 import {
     Button,
     Detail,
@@ -14,6 +14,8 @@ import {
     rowVariants,
     Wrapper,
 } from "./style";
+import { useSetRecoilState } from "recoil";
+import { modalInfoState } from "../../../states/atoms";
 
 interface InterfaceSliderProps {
     data: InterfaceMovie[];
@@ -44,6 +46,13 @@ export default function Slider({ data, sliderTitle }: InterfaceSliderProps) {
         toggleLeaving();
         setIdx((prev) => (prev === 0 ? maxIdx : prev - 1));
     };
+
+    const setModalInfo = useSetRecoilState(modalInfoState);
+    useEffect(() => {
+        setModalInfo((current) => {
+            return { data: [...current.data, ...data] };
+        });
+    }, []);
 
     const navigate = useNavigate();
     const onClickItem = (movieId: number) => {
