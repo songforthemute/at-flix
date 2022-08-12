@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { getImagePath } from "../../../libs";
+import { genres, getImagePath } from "../../../libs";
 import { InterfaceMovie } from "../../../apis/api";
 import {
     Cover,
@@ -9,6 +9,10 @@ import {
     Title,
     Overview,
     Container,
+    Genre,
+    Badges,
+    Genres,
+    Votes,
 } from "./style";
 
 interface InterfaceModalProps {
@@ -18,6 +22,7 @@ interface InterfaceModalProps {
 }
 
 function Modal({ movidId, scrolly, data }: InterfaceModalProps) {
+    console.log(data);
     const navigate = useNavigate();
     function onClickOverlay() {
         navigate(-1);
@@ -48,6 +53,14 @@ function Modal({ movidId, scrolly, data }: InterfaceModalProps) {
                 />
                 <Container>
                     <Title>{data?.title || data?.name}</Title>
+                    <Badges>
+                        <Genres>
+                            {data?.genre_ids.map((id) => (
+                                <Genre key={id}>{genres[id]}</Genre>
+                            ))}
+                        </Genres>
+                        <Votes>{data?.vote_average! * 10} / 100</Votes>
+                    </Badges>
                     <Overview>{data?.overview}</Overview>
                 </Container>
             </PopUp>

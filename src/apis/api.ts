@@ -12,6 +12,7 @@ export interface InterfaceMovie {
     vote_average: number;
     vote_count: number;
     name?: string;
+    genre_ids: number[];
 }
 
 export interface InterfaceGetMovies {
@@ -36,6 +37,7 @@ export interface InterfaceSeries {
     overview: string;
     vote_average: number;
     vote_count: number;
+    genre_ids: number[];
 }
 
 export interface InterfaceGetSeries {

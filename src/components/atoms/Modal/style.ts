@@ -77,5 +77,37 @@ export const Title = styled.h2`
 
 export const Overview = styled.p`
     color: ${(props) => props.theme.white.lighter};
-    font-size: 16px;
+    font-size: 14px;
+`;
+
+export const Badges = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`;
+
+export const Genres = styled.div``;
+
+export const Genre = styled.span`
+    display: inline-block;
+    padding: 2px 3px;
+    margin: 10px 2px;
+    background-color: white;
+    color: ${(props) => props.theme.black.darker};
+    font-weight: 700;
+    border-radius: 5px;
+    transition: all 0.25s ease-in-out;
+    &:hover {
+        background-color: transparent;
+        color: ${(props) => props.theme.yellow};
+    }
+`;
+
+export const Votes = styled.span`
+    display: inline-block;
+    padding: 2px 4px;
+    background-color: white;
+    color: ${(props) => props.theme.black.darker};
+    font-weight: 700;
+    border-radius: 5px;
 `;
