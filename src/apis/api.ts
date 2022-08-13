@@ -77,6 +77,34 @@ export function getOnTheAirSeries() {
     ).then((response) => response.json());
 }
 
-export function searchProgram() {
-    // return fetch();
+export interface InterfaceSearchResults {
+    backdrop_path: string;
+    first_air_date?: string;
+    genre_ids: number[];
+    id: number;
+    media_type: string;
+    origin_country: string[] | string;
+    original_language: string;
+    original_name: string;
+    overview: string;
+    popularity: number;
+    poster_path: string;
+    release_date?: string;
+    name?: string;
+    title?: string;
+    vote_average: number;
+    vote_count: number;
+}
+
+export interface InterfaceSearch {
+    page: number;
+    total_pages: number;
+    total_results: number;
+    results: InterfaceSearchResults[];
+}
+
+export function searchProgram(keyword: string) {
+    return fetch(
+        `${BASE_URL}/search/multi?api_key=${API_KEY}&language=ko-KR&query=${keyword}&page=1`
+    ).then((response) => response.json());
 }
