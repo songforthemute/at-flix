@@ -1,7 +1,7 @@
 import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getImagePath, isMobile, programTypes } from "../../../libs";
+import { getImagePath, isNotMobile, programTypes } from "../../../libs";
 import { InterfaceMovie } from "../../../apis/api";
 import {
     Button,
@@ -30,7 +30,7 @@ export default function Slider({
     const [leaving, setLeaving] = useState(false);
     const [isStraight, setIsStraight] = useState(true);
 
-    const offset = isMobile() ? 6 : 4;
+    const offset = isNotMobile() ? 6 : 4;
     const maxIdx = Math.ceil(data.length / offset) - 1;
 
     const toggleLeaving = () => setLeaving((prev) => !prev);

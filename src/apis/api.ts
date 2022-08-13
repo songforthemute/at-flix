@@ -16,7 +16,7 @@ export interface InterfaceMovie {
 }
 
 export interface InterfaceGetMovies {
-    dates: {
+    dates?: {
         maximum: string;
         minimum: string;
     };
@@ -65,9 +65,9 @@ export function getUpcomingMovies() {
     ).then((response) => response.json());
 }
 
-export function getMovieDetail(movieId: number) {
+export function getDetail(type: string, Id: number) {
     return fetch(
-        `${BASE_URL}/movie/${movieId}?api_key=${API_KEY}&language=ko-KR`
+        `${BASE_URL}/${type}/${Id}?api_key=${API_KEY}&language=ko-KR`
     ).then((response) => response.json());
 }
 

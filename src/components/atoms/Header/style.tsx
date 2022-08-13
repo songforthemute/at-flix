@@ -44,8 +44,8 @@ export const Logo = styled(motion.svg)`
     margin-right: 20px;
     fill: ${(props) => props.theme.yellow};
     path {
-        /* stroke-width: 3px;
-        stroke: white;/ */
+        /* stroke-width: 4px;
+        stroke: white; */
     }
 `;
 

@@ -22,7 +22,6 @@ interface InterfaceModalProps {
 }
 
 function Modal({ movidId, scrolly, data }: InterfaceModalProps) {
-    console.log(data);
     const navigate = useNavigate();
     function onClickOverlay() {
         navigate(-1);
