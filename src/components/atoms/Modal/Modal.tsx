@@ -86,7 +86,9 @@ function Modal({
                             )}
                         />
                         <Container>
-                            <Title>{seriesData?.name}</Title>
+                            <Title>
+                                {seriesData?.name || seriesData?.title}
+                            </Title>
                             <Badges>
                                 <Genres>
                                     {seriesData?.genre_ids.map((id) => (

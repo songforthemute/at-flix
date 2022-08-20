@@ -37,6 +37,7 @@ export interface InterfaceSeries {
     vote_average: number;
     vote_count: number;
     genre_ids: number[];
+    title?: string;
 }
 
 export interface InterfaceGetSeries {
@@ -117,6 +118,18 @@ export function getDetail(type: string, Id: number) {
 export function getOnTheAirSeries() {
     return fetch(
         `${BASE_URL}/tv/on_the_air?api_key=${API_KEY}&language=ko-KR&page=1`
+    ).then((response) => response.json());
+}
+
+export function getPopularSeries() {
+    return fetch(
+        `${BASE_URL}/tv/popular?api_key=${API_KEY}&language=ko-KR&page=1`
+    ).then((response) => response.json());
+}
+
+export function getTopRatedSeries() {
+    return fetch(
+        `${BASE_URL}/tv/top_rated?api_key=${API_KEY}&language=ko-KR&page=1`
     ).then((response) => response.json());
 }
 
