@@ -20,8 +20,6 @@ export default function Home() {
     const { data: upcoming, isLoading: isLoadingUpcoming } =
         useQuery<InterfaceGetMovies>(["movies", "upcoming"], getUpcomingMovies);
 
-    console.log("movies: ", nowPlaying);
-
     const clickedNowPlayingMatch = useMatch("/movie/:movieId");
     const clickedNowPlaying = clickedNowPlayingMatch?.params.movieId
         ? nowPlaying?.results.find(
@@ -59,13 +57,13 @@ export default function Home() {
                         <Title>{nowPlaying?.results[0].title}</Title>
                         <Overview>{nowPlaying?.results[0].overview}</Overview>
                     </Banner>
+
+                    {/* Slider */}
                     <Slider
                         movieData={nowPlaying?.results.slice(1)!}
                         sliderTitle="Now Playing"
                         type="movie"
                     />
-
-                    {/* Slider */}
                     {!isLoadingUpcoming && (
                         <Slider
                             movieData={upcoming?.results!}

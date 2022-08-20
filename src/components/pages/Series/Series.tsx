@@ -45,7 +45,7 @@ export default function Series() {
                     {/* Slider */}
                     {!isLoadingSeries && (
                         <Slider
-                            seriesData={onTheAir?.results!}
+                            seriesData={onTheAir?.results.slice(1)}
                             sliderTitle="On Air Series"
                             type="series"
                         />
