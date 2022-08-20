@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { genres, getImagePath } from "../../../libs";
-import { InterfaceMovie } from "../../../apis/api";
+import { InterfaceMovie, InterfaceSeries } from "../../../apis/api";
 import {
     Cover,
     modalVariants,
@@ -16,12 +16,18 @@ import {
 } from "./style";
 
 interface InterfaceModalProps {
-    movidId: string;
+    programId: string;
     scrolly: number;
-    data?: InterfaceMovie;
+    movieData?: InterfaceMovie;
+    seriesData?: InterfaceSeries;
 }
 
-function Modal({ movidId, scrolly, data }: InterfaceModalProps) {
+function Modal({
+    programId,
+    scrolly,
+    movieData,
+    seriesData,
+}: InterfaceModalProps) {
     const navigate = useNavigate();
     function onClickOverlay() {
         navigate(-1);
@@ -38,30 +44,61 @@ function Modal({ movidId, scrolly, data }: InterfaceModalProps) {
             />
             <PopUp
                 scrolly={scrolly}
-                layoutId={movidId}
+                layoutId={programId}
                 variants={modalVariants}
                 initial="initial"
                 animate="animate"
                 exit="exit"
             >
-                <Cover
-                    bg={getImagePath(
-                        data?.backdrop_path! || data?.poster_path!,
-                        "w500"
-                    )}
-                />
-                <Container>
-                    <Title>{data?.title || data?.name}</Title>
-                    <Badges>
-                        <Genres>
-                            {data?.genre_ids.map((id) => (
-                                <Genre key={id}>{genres[id]}</Genre>
-                            ))}
-                        </Genres>
-                        <Votes>{data?.vote_average! * 10} / 100</Votes>
-                    </Badges>
-                    <Overview>{data?.overview}</Overview>
-                </Container>
+                {movieData ? (
+                    <>
+                        <Cover
+                            bg={getImagePath(
+                                movieData.backdrop_path! ||
+                                    movieData.poster_path!,
+                                "w500"
+                            )}
+                        />
+                        <Container>
+                            <Title>{movieData?.title}</Title>
+                            <Badges>
+                                <Genres>
+                                    {movieData?.genre_ids.map((id) => (
+                                        <Genre key={id}>{genres[id]}</Genre>
+                                    ))}
+                                </Genres>
+                                <Votes>
+                                    {movieData?.vote_average! * 10} / 100
+                                </Votes>
+                            </Badges>
+                            <Overview>{movieData?.overview}</Overview>
+                        </Container>
+                    </>
+                ) : (
+                    <>
+                        <Cover
+                            bg={getImagePath(
+                                seriesData!.backdrop_path! ||
+                                    seriesData!.poster_path!,
+                                "w500"
+                            )}
+                        />
+                        <Container>
+                            <Title>{seriesData?.name}</Title>
+                            <Badges>
+                                <Genres>
+                                    {seriesData?.genre_ids.map((id) => (
+                                        <Genre key={id}>{genres[id]}</Genre>
+                                    ))}
+                                </Genres>
+                                <Votes>
+                                    {seriesData?.vote_average! * 10} / 100
+                                </Votes>
+                            </Badges>
+                            <Overview>{seriesData?.overview}</Overview>
+                        </Container>
+                    </>
+                )}
             </PopUp>
         </>
     );

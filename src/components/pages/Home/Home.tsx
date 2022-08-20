@@ -4,7 +4,6 @@ import { useMatch, useNavigate } from "react-router-dom";
 import { getImagePath } from "../../../libs";
 import {
     getNowPlayingMovies,
-    getOnTheAirSeries,
     getUpcomingMovies,
     InterfaceGetMovies,
 } from "../../../apis/api";
@@ -20,8 +19,8 @@ export default function Home() {
         );
     const { data: upcoming, isLoading: isLoadingUpcoming } =
         useQuery<InterfaceGetMovies>(["movies", "upcoming"], getUpcomingMovies);
-    const { data: series, isLoading: isLoadingSeries } =
-        useQuery<InterfaceGetMovies>(["series", "onTheAir"], getOnTheAirSeries);
+
+    console.log("movies: ", nowPlaying);
 
     const clickedNowPlayingMatch = useMatch("/movie/:movieId");
     const clickedNowPlaying = clickedNowPlayingMatch?.params.movieId
@@ -33,13 +32,6 @@ export default function Home() {
     const clickedUpcoming = clickedNowPlayingMatch?.params.movieId
         ? upcoming?.results.find(
               (v) => v.id.toString() === clickedNowPlayingMatch.params.movieId
-          )
-        : undefined;
-
-    const clickedSeriesMatch = useMatch("/series/:seriesId");
-    const clickedSeries = clickedSeriesMatch?.params.seriesId
-        ? series?.results.find(
-              (v) => v.id.toString() === clickedSeriesMatch.params.seriesId
           )
         : undefined;
 
@@ -68,38 +60,29 @@ export default function Home() {
                         <Overview>{nowPlaying?.results[0].overview}</Overview>
                     </Banner>
                     <Slider
-                        data={nowPlaying?.results.slice(1)!}
+                        movieData={nowPlaying?.results.slice(1)!}
                         sliderTitle="Now Playing"
                         type="movie"
                     />
 
+                    {/* Slider */}
                     {!isLoadingUpcoming && (
                         <Slider
-                            data={upcoming?.results!}
+                            movieData={upcoming?.results!}
                             sliderTitle="Upcoming"
                             type="movie"
                         />
                     )}
-                    {!isLoadingSeries && (
-                        <Slider
-                            data={series?.results!}
-                            sliderTitle="On Air Series"
-                            type="series"
-                        />
-                    )}
+
+                    {/* Modal from */}
                     <AnimatePresence>
                         {clickedNowPlayingMatch && (
                             <Modal
-                                data={clickedNowPlaying || clickedUpcoming}
+                                movieData={clickedNowPlaying || clickedUpcoming}
                                 scrolly={scrollY.get()}
-                                movidId={clickedNowPlayingMatch.params.movieId!}
-                            />
-                        )}
-                        {clickedSeriesMatch && (
-                            <Modal
-                                data={clickedSeries}
-                                scrolly={scrollY.get()}
-                                movidId={clickedSeriesMatch.params.seriesId!}
+                                programId={
+                                    clickedNowPlayingMatch.params.movieId!
+                                }
                             />
                         )}
                     </AnimatePresence>

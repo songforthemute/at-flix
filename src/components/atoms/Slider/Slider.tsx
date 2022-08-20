@@ -2,7 +2,7 @@ import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getImagePath, isNotMobile, programTypes } from "../../../libs";
-import { InterfaceMovie } from "../../../apis/api";
+import { InterfaceMovie, InterfaceSeries } from "../../../apis/api";
 import {
     Button,
     Detail,
@@ -16,13 +16,15 @@ import {
 } from "./style";
 
 interface InterfaceSliderProps {
-    data: InterfaceMovie[];
+    movieData?: InterfaceMovie[];
+    seriesData?: InterfaceSeries[];
     sliderTitle: string;
     type: programTypes;
 }
 
 export default function Slider({
-    data,
+    movieData,
+    seriesData,
     sliderTitle,
     type,
 }: InterfaceSliderProps) {
@@ -31,7 +33,7 @@ export default function Slider({
     const [isStraight, setIsStraight] = useState(true);
 
     const offset = isNotMobile() ? 6 : 4;
-    const maxIdx = Math.ceil(data.length / offset) - 1;
+    const maxIdx = Math.ceil((movieData || seriesData)!.length / offset) - 1;
 
     const toggleLeaving = () => setLeaving((prev) => !prev);
     const onIncreaseIdx = () => {
@@ -82,30 +84,57 @@ export default function Slider({
                     exit="exit"
                     key={idx}
                 >
-                    {data
-                        .slice(offset * idx, offset * (idx + 1))
-                        .map((movie) => (
-                            <Item
-                                layoutId={movie.id.toString()}
-                                onClick={() => onClickItem(movie.id)}
-                                key={movie.id}
-                                variants={itemVariants}
-                                initial="initial"
-                                whileHover="hover"
-                            >
-                                <img
-                                    src={getImagePath(
-                                        movie.poster_path ||
-                                            movie.backdrop_path,
-                                        "w500"
-                                    )}
-                                    alt={movie.title}
-                                />
-                                <Detail variants={detailVariants}>
-                                    <h3>{movie.title || movie.name}</h3>
-                                </Detail>
-                            </Item>
-                        ))}
+                    {movieData
+                        ? // 무비 데이터 케이스
+                          movieData
+                              .slice(offset * idx, offset * (idx + 1))
+                              .map((movie) => (
+                                  <Item
+                                      layoutId={movie.id.toString()}
+                                      onClick={() => onClickItem(movie.id)}
+                                      key={movie.id}
+                                      variants={itemVariants}
+                                      initial="initial"
+                                      whileHover="hover"
+                                  >
+                                      <img
+                                          src={getImagePath(
+                                              movie.poster_path ||
+                                                  movie.backdrop_path,
+                                              "w500"
+                                          )}
+                                          alt={movie.title}
+                                      />
+                                      <Detail variants={detailVariants}>
+                                          <h3>{movie.title}</h3>
+                                      </Detail>
+                                  </Item>
+                              ))
+                        : // 시리즈 데이터 케이스
+                          seriesData!
+                              .slice(offset * idx, offset * (idx + 1))
+                              .map((movie) => (
+                                  <Item
+                                      layoutId={movie.id.toString()}
+                                      onClick={() => onClickItem(movie.id)}
+                                      key={movie.id}
+                                      variants={itemVariants}
+                                      initial="initial"
+                                      whileHover="hover"
+                                  >
+                                      <img
+                                          src={getImagePath(
+                                              movie.poster_path ||
+                                                  movie.backdrop_path,
+                                              "w500"
+                                          )}
+                                          alt={movie.name}
+                                      />
+                                      <Detail variants={detailVariants}>
+                                          <h3>{movie.name}</h3>
+                                      </Detail>
+                                  </Item>
+                              ))}
                 </Row>
             </AnimatePresence>
         </Wrapper>
