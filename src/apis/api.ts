@@ -96,9 +96,9 @@ export function getNowPlayingMovies() {
     ).then((response) => response.json());
 }
 
-export function getPopularMovies() {
+export function getTopRatedMovies() {
     return fetch(
-        `${BASE_URL}/movie/popular?api_key=${API_KEY}&language=ko-KR&page=1&region=kr`
+        `${BASE_URL}/movie/top_rated?api_key=${API_KEY}&language=ko-KR&page=1&region=kr`
     ).then((response) => response.json());
 }
 

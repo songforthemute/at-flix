@@ -49,10 +49,15 @@ export default function Header() {
         });
     }, [scrollY, navAnimation]);
 
+    function _onClickLogo() {
+        navigate("/");
+    }
+
     return (
         <Nav variants={navVariants} initial="initial" animate={navAnimation}>
             <Col>
                 <Logo
+                    onClick={_onClickLogo}
                     variants={logoVariants}
                     whileHover="active"
                     initial="initial"

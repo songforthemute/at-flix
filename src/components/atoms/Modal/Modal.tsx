@@ -51,6 +51,7 @@ function Modal({
                 exit="exit"
             >
                 {movieData ? (
+                    // 무비 데이터 케이스
                     <>
                         <Cover
                             bg={getImagePath(
@@ -75,6 +76,7 @@ function Modal({
                         </Container>
                     </>
                 ) : (
+                    // 시리즈 데이터 케이스
                     <>
                         <Cover
                             bg={getImagePath(
