@@ -1,4 +1,4 @@
-# 0. Coin Track
+# 0. At-Flix
 
 이 프로젝트는 netflix에서 영감을 받아, RESTful API를 이용한 Movie & TV series infomation Web Application을 목표로, 반응형 디자인으로 구현했습니다.
 
@@ -34,7 +34,7 @@
 
 -   작품 별 상세 페이지와 모달 내 react-player를 이용한 작품 트레일러 구현
 
--   react-hook-form을 이용한 검색 폼과 에러 메세지 구현과 Framer-motion을 통한 폼 열기/닫기 구현
+-   react-hook-form을 이용한 헤더의 검색 폼과 에러 메세지 구현과 Framer-motion을 통한 폼 열기/닫기 구현
 
 -   Styled-Component와 Framer-motion을 통한 다양한 트랜지션 애니메이션 구현
 
