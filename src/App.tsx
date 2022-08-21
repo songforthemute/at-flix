@@ -1,4 +1,4 @@
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/atoms/Header/Header";
 import Home from "./components/pages/Home/Home";
 import Series from "./components/pages/Series/Series";
@@ -8,7 +8,7 @@ import Footer from "./components/atoms/Footer/Footer";
 
 export default function App() {
     return (
-        <HashRouter basename={`${process.env.PUBLIC_URL}/`}>
+        <BrowserRouter>
             <Header />
             <Routes>
                 <Route path={`/series`} element={<Series />}>
@@ -21,6 +21,6 @@ export default function App() {
                 </Route>
             </Routes>
             <Footer />
-        </HashRouter>
+        </BrowserRouter>
     );
 }
