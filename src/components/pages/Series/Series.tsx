@@ -3,7 +3,7 @@ import { AnimatePresence, useScroll } from "framer-motion";
 import { useMatch, useNavigate } from "react-router-dom";
 import {
     getOnTheAirSeries,
-    getTopRatedMovies,
+    getTopRatedSeries,
     getPopularSeries,
     InterfaceGetSeries,
 } from "../../../apis/api";
@@ -17,11 +17,9 @@ export default function Series() {
     const { data: onTheAir, isLoading: isLoadingOnTheAir } =
         useQuery<InterfaceGetSeries>(["series", "onTheAir"], getOnTheAirSeries);
     const { data: topRated, isLoading: isLoadingTopRated } =
-        useQuery<InterfaceGetSeries>(["series", "topRated"], getTopRatedMovies);
+        useQuery<InterfaceGetSeries>(["series", "topRated"], getTopRatedSeries);
     const { data: popular, isLoading: isLoadingPopular } =
         useQuery<InterfaceGetSeries>(["series", "popular"], getPopularSeries);
-
-    console.log(topRated);
 
     // useMatch for Modal
     const clickedSeriesMatch = useMatch("/series/:seriesId");
@@ -49,27 +47,27 @@ export default function Series() {
 
     return (
         <Wrapper>
-            {isLoadingOnTheAir ? (
+            {isLoadingPopular ? (
                 <Loading>Loading...</Loading>
             ) : (
                 <>
                     <Banner
                         onClick={() =>
-                            moveToBanner(onTheAir?.results[0].id.toString()!)
+                            moveToBanner(popular?.results[0].id.toString()!)
                         }
                         bg={getImagePath(
-                            onTheAir?.results[0].backdrop_path || ""
+                            popular?.results[0].backdrop_path || ""
                         )}
                     >
-                        <Title>{onTheAir?.results[0].name}</Title>
-                        <Overview>{onTheAir?.results[0].overview}</Overview>
+                        <Title>{popular?.results[0].name}</Title>
+                        <Overview>{popular?.results[0].overview}</Overview>
                     </Banner>
 
                     {/* Slider */}
-                    {!isLoadingOnTheAir && (
+                    {!isLoadingPopular && (
                         <Slider
-                            seriesData={onTheAir?.results.slice(1)}
-                            sliderTitle="On Air Series"
+                            seriesData={popular?.results.slice(1)}
+                            sliderTitle="Popular"
                             type="series"
                         />
                     )}
@@ -80,10 +78,10 @@ export default function Series() {
                             type="series"
                         />
                     )}
-                    {!isLoadingPopular && (
+                    {!isLoadingOnTheAir && (
                         <Slider
-                            seriesData={popular?.results}
-                            sliderTitle="Popular"
+                            seriesData={onTheAir?.results}
+                            sliderTitle="On Air Series"
                             type="series"
                         />
                     )}
