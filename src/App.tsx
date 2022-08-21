@@ -8,7 +8,7 @@ import Footer from "./components/atoms/Footer/Footer";
 
 export default function App() {
     return (
-        <HashRouter basename={"/"}>
+        <HashRouter>
             <Header />
             <Routes>
                 <Route path={`/series`} element={<Series />}>
