@@ -162,3 +162,29 @@ export const inputVariants: Variants = {
         },
     }),
 };
+
+export const ErrMessage = styled(motion.div)`
+    margin: 0 auto;
+    position: absolute;
+    top: 80px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 100px;
+    width: 400px;
+`;
+
+export const errMessageVariants: Variants = {
+    initial: {
+        opacity: 0,
+    },
+    animate: {
+        opacity: 1,
+        transition: {
+            duration: 0.3,
+            ease: "easeInOut",
+        },
+    },
+};
