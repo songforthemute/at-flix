@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useLocation, useNavigate } from "react-router-dom";
-import { InterfaceSearch, searchProgram } from "../../../apis/api";
+import { InterfaceSearch, searchProgram } from "../../../apis/searchApi";
 import { getImagePath, isNotMobile } from "../../../libs";
 import { Container, Result, Results, resultVariants } from "./style";
 

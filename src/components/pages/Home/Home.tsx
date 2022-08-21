@@ -1,13 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import { AnimatePresence, useScroll } from "framer-motion";
 import { useMatch, useNavigate } from "react-router-dom";
-import { getImagePath } from "../../../libs";
 import {
     getNowPlayingMovies,
     getTopRatedMovies,
     getUpcomingMovies,
     InterfaceGetMovies,
-} from "../../../apis/api";
+} from "../../../apis/movieApi";
+import { getImagePath } from "../../../libs";
+
 import Modal from "../../atoms/Modal/Modal";
 import Slider from "../../atoms/Slider/Slider";
 import { Banner, Loading, Overview, Title, Wrapper } from "./style";

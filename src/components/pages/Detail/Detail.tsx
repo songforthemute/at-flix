@@ -6,7 +6,7 @@ import {
     getVideos,
     InterfaceGetResult,
     InterfaceGetVideos,
-} from "../../../apis/api";
+} from "../../../apis/searchApi";
 import { getImagePath, isNotMobile, videoUrlConverter } from "../../../libs";
 import { Genre, Genres, Votes } from "../../atoms/Modal/style";
 import { Container, Dating, Overview, Title, Wrapper } from "./style";

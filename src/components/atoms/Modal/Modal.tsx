@@ -1,11 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { genres, getImagePath, videoUrlConverter } from "../../../libs";
-import {
-    getVideos,
-    InterfaceGetVideos,
-    InterfaceMovie,
-    InterfaceSeries,
-} from "../../../apis/api";
+import { getVideos, InterfaceGetVideos } from "../../../apis/searchApi";
 import ReactPlayer from "react-player/lazy";
 import {
     Cover,
@@ -21,6 +16,8 @@ import {
     Votes,
 } from "./style";
 import { useQuery } from "@tanstack/react-query";
+import { InterfaceMovie } from "../../../apis/movieApi";
+import { InterfaceSeries } from "../../../apis/seriesApi";
 
 interface InterfaceModalProps {
     programId: string;

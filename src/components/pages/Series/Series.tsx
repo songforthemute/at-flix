@@ -3,10 +3,10 @@ import { AnimatePresence, useScroll } from "framer-motion";
 import { useMatch, useNavigate } from "react-router-dom";
 import {
     getOnTheAirSeries,
-    getTopRatedSeries,
     getPopularSeries,
+    getTopRatedSeries,
     InterfaceGetSeries,
-} from "../../../apis/api";
+} from "../../../apis/seriesApi";
 import { getImagePath } from "../../../libs";
 import Modal from "../../atoms/Modal/Modal";
 import Slider from "../../atoms/Slider/Slider";

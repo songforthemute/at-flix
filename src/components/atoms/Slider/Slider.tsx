@@ -1,8 +1,9 @@
 import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { InterfaceMovie } from "../../../apis/movieApi";
+import { InterfaceSeries } from "../../../apis/seriesApi";
 import { getImagePath, isNotMobile, programTypes } from "../../../libs";
-import { InterfaceMovie, InterfaceSeries } from "../../../apis/api";
 import {
     Button,
     Detail,

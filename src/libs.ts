@@ -1,3 +1,5 @@
+export const API_KEY = process.env.REACT_APP_API_KEY;
+export const BASE_URL = process.env.REACT_APP_BASE_URL;
 const IMG_URL = process.env.REACT_APP_IMG_URL;
 
 export type programTypes = "movie" | "series";
