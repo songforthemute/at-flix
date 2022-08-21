@@ -55,7 +55,7 @@ export default function Slider({
 
     const navigate = useNavigate();
     const onClickItem = (movieId: number) => {
-        navigate(`${process.env.PUBLIC_URL}/${type}/${movieId}`);
+        navigate(`/${type}/${movieId}`);
     };
 
     return (

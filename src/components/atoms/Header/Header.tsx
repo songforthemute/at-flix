@@ -29,8 +29,8 @@ interface InterfaceForm {
 }
 
 export default function Header() {
-    const isMatchHome = useMatch(`${process.env.PUBLIC_URL}/`);
-    const isMatchSeries = useMatch(`${process.env.PUBLIC_URL}/series`);
+    const isMatchHome = useMatch(`/`);
+    const isMatchSeries = useMatch(`/series`);
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -42,7 +42,7 @@ export default function Header() {
     } = useForm<InterfaceForm>();
 
     const onValid = (data: InterfaceForm) => {
-        navigate(`${process.env.PUBLIC_URL}/search?keyword=${data.keyword}`);
+        navigate(`/search?keyword=${data.keyword}`);
     };
 
     // 검색창 오픈
@@ -72,7 +72,7 @@ export default function Header() {
 
     // 로고 클릭 시
     const _onClickLogo = () => {
-        navigate(`${process.env.PUBLIC_URL}/`);
+        navigate(`/`);
     };
 
     return (
@@ -97,13 +97,13 @@ export default function Header() {
                     </Logo>
                     <Category layout>
                         <Item>
-                            <Link to={`${process.env.PUBLIC_URL}/`}>
+                            <Link to={`/`}>
                                 Home
                                 {isMatchHome && <UnderDot layoutId="dot" />}
                             </Link>
                         </Item>
                         <Item>
-                            <Link to={`${process.env.PUBLIC_URL}/series`}>
+                            <Link to={`/series`}>
                                 Series
                                 {isMatchSeries && <UnderDot layoutId="dot" />}
                             </Link>

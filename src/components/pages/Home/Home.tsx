@@ -27,9 +27,7 @@ export default function Home() {
         useQuery<InterfaceGetMovies>(["movies", "upcoming"], getUpcomingMovies);
 
     // useMatch
-    const clickedNowPlayingMatch = useMatch(
-        `${process.env.PUBLIC_URL}/movie/:movieId`
-    );
+    const clickedNowPlayingMatch = useMatch(`/movie/:movieId`);
     const clickedNowPlaying = clickedNowPlayingMatch?.params.movieId
         ? nowPlaying?.results.find(
               (v) => v.id.toString() === clickedNowPlayingMatch.params.movieId
@@ -50,7 +48,7 @@ export default function Home() {
 
     const navigate = useNavigate();
     const moveToBanner = (movieId: string) => {
-        navigate(`${process.env.PUBLIC_URL}/movie/${movieId}`);
+        navigate(`/movie/${movieId}`);
     };
 
     return (

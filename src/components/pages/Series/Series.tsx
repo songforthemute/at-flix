@@ -3,7 +3,7 @@ import { AnimatePresence, useScroll } from "framer-motion";
 import { useMatch, useNavigate } from "react-router-dom";
 import {
     getOnTheAirSeries,
-    getPopularSeries,
+    // getPopularSeries,
     getTopRatedSeries,
     InterfaceGetSeries,
 } from "../../../apis/seriesApi";
@@ -18,13 +18,11 @@ export default function Series() {
         useQuery<InterfaceGetSeries>(["series", "onTheAir"], getOnTheAirSeries);
     const { data: topRated, isLoading: isLoadingTopRated } =
         useQuery<InterfaceGetSeries>(["series", "topRated"], getTopRatedSeries);
-    const { data: popular, isLoading: isLoadingPopular } =
-        useQuery<InterfaceGetSeries>(["series", "popular"], getPopularSeries);
+    // const { data: popular, isLoading: isLoadingPopular } =
+    //     useQuery<InterfaceGetSeries>(["series", "popular"], getPopularSeries);
 
     // useMatch for Modal
-    const clickedSeriesMatch = useMatch(
-        `${process.env.PUBLIC_URL}/series/:seriesId`
-    );
+    const clickedSeriesMatch = useMatch(`/series/:seriesId`);
     const clickedOnTheAir = clickedSeriesMatch?.params.seriesId
         ? onTheAir?.results.find(
               (v) => v.id.toString() === clickedSeriesMatch.params.seriesId
@@ -35,41 +33,48 @@ export default function Series() {
               (v) => v.id.toString() === clickedSeriesMatch.params.seriesId
           )
         : undefined;
-    const clickedPopular = clickedSeriesMatch?.params.seriesId
-        ? popular?.results.find(
-              (v) => v.id.toString() === clickedSeriesMatch.params.seriesId
-          )
-        : undefined;
+    // const clickedPopular = clickedSeriesMatch?.params.seriesId
+    //     ? popular?.results.find(
+    //           (v) => v.id.toString() === clickedSeriesMatch.params.seriesId
+    //       )
+    //     : undefined;
 
     const { scrollY } = useScroll();
     const navigate = useNavigate();
     const moveToBanner = (seriesId: string) => {
-        navigate(`${process.env.PUBLIC_URL}/series/${seriesId}`);
+        navigate(`/series/${seriesId}`);
     };
 
     return (
         <Wrapper>
-            {isLoadingPopular ? (
+            {isLoadingOnTheAir ? (
                 <Loading>Loading...</Loading>
             ) : (
                 <>
                     <Banner
                         onClick={() =>
-                            moveToBanner(popular?.results[0].id.toString()!)
+                            moveToBanner(onTheAir?.results[0].id.toString()!)
                         }
                         bg={getImagePath(
-                            popular?.results[0].backdrop_path || ""
+                            onTheAir?.results[0].backdrop_path || ""
                         )}
                     >
-                        <Title>{popular?.results[0].name}</Title>
-                        <Overview>{popular?.results[0].overview}</Overview>
+                        <Title>{onTheAir?.results[0].name}</Title>
+                        <Overview>{onTheAir?.results[0].overview}</Overview>
                     </Banner>
 
                     {/* Slider */}
-                    {!isLoadingPopular && (
+                    {/* {!isLoadingPopular && (
                         <Slider
-                            seriesData={popular?.results.slice(1)}
+                            seriesData={popular?.results}
                             sliderTitle="Popular"
+                            type="series"
+                        />
+                        )} */}
+                    {!isLoadingOnTheAir && (
+                        <Slider
+                            seriesData={onTheAir?.results.slice(1)}
+                            sliderTitle="On Air Series"
                             type="series"
                         />
                     )}
@@ -80,22 +85,14 @@ export default function Series() {
                             type="series"
                         />
                     )}
-                    {!isLoadingOnTheAir && (
-                        <Slider
-                            seriesData={onTheAir?.results}
-                            sliderTitle="On Air Series"
-                            type="series"
-                        />
-                    )}
 
                     {/* Modal Form */}
                     <AnimatePresence>
                         {clickedSeriesMatch && (
                             <Modal
                                 seriesData={
-                                    clickedOnTheAir ||
-                                    clickedTopRated ||
-                                    clickedPopular
+                                    clickedOnTheAir || clickedTopRated
+                                    // || clickedPopular
                                 }
                                 scrolly={scrollY.get()}
                                 programId={clickedSeriesMatch.params.seriesId!}

@@ -8,31 +8,16 @@ import Footer from "./components/atoms/Footer/Footer";
 
 export default function App() {
     return (
-        <BrowserRouter>
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
             <Header />
             <Routes>
-                <Route
-                    path={`${process.env.PUBLIC_URL}/series`}
-                    element={<Series />}
-                >
-                    <Route
-                        path={`${process.env.PUBLIC_URL}/series/:seriesId`}
-                        element={<Home />}
-                    />
+                <Route path={`/series`} element={<Series />}>
+                    <Route path={`/series/:seriesId`} element={<Home />} />
                 </Route>
-                <Route
-                    path={`${process.env.PUBLIC_URL}/search/:type/:id`}
-                    element={<Detail />}
-                />
-                <Route
-                    path={`${process.env.PUBLIC_URL}/search`}
-                    element={<Search />}
-                />
-                <Route path={`${process.env.PUBLIC_URL}/`} element={<Home />}>
-                    <Route
-                        path={`${process.env.PUBLIC_URL}/movie/:movieId`}
-                        element={<Home />}
-                    />
+                <Route path={`/search/:type/:id`} element={<Detail />} />
+                <Route path={`/search`} element={<Search />} />
+                <Route path={`/`} element={<Home />}>
+                    <Route path={`/movie/:movieId`} element={<Home />} />
                 </Route>
             </Routes>
             <Footer />

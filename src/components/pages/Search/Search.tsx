@@ -15,7 +15,7 @@ export default function Search() {
 
     const navigate = useNavigate();
     const onClickResult = (type: string, id: number) => {
-        navigate(`${process.env.PUBLIC_URL}/search/${type}/${id}`);
+        navigate(`/search/${type}/${id}`);
     };
 
     return (
