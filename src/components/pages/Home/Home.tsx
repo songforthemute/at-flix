@@ -27,7 +27,9 @@ export default function Home() {
         useQuery<InterfaceGetMovies>(["movies", "upcoming"], getUpcomingMovies);
 
     // useMatch
-    const clickedNowPlayingMatch = useMatch("/movie/:movieId");
+    const clickedNowPlayingMatch = useMatch(
+        `${process.env.PUBLIC_URL}/movie/:movieId`
+    );
     const clickedNowPlaying = clickedNowPlayingMatch?.params.movieId
         ? nowPlaying?.results.find(
               (v) => v.id.toString() === clickedNowPlayingMatch.params.movieId

@@ -22,7 +22,9 @@ export default function Series() {
         useQuery<InterfaceGetSeries>(["series", "popular"], getPopularSeries);
 
     // useMatch for Modal
-    const clickedSeriesMatch = useMatch("/series/:seriesId");
+    const clickedSeriesMatch = useMatch(
+        `${process.env.PUBLIC_URL}/series/:seriesId`
+    );
     const clickedOnTheAir = clickedSeriesMatch?.params.seriesId
         ? onTheAir?.results.find(
               (v) => v.id.toString() === clickedSeriesMatch.params.seriesId

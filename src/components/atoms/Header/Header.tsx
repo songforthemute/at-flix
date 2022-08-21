@@ -29,8 +29,8 @@ interface InterfaceForm {
 }
 
 export default function Header() {
-    const isMatchHome = useMatch("/");
-    const isMatchSeries = useMatch("series");
+    const isMatchHome = useMatch(`${process.env.PUBLIC_URL}/`);
+    const isMatchSeries = useMatch(`${process.env.PUBLIC_URL}/series`);
     const navigate = useNavigate();
     const location = useLocation();
 

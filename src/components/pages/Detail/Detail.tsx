@@ -16,7 +16,7 @@ import { Genre, Genres, Votes } from "../../atoms/Modal/style";
 import { Container, Dating, Overview, Title, Wrapper } from "./style";
 
 export default function Detail() {
-    const match = useMatch("/search/:type/:id");
+    const match = useMatch(`${process.env.PUBLIC_URL}/search/:type/:id`);
 
     const { data, isLoading } = useQuery<InterfaceGetResult>(
         ["search", `${match?.params.id}`],
