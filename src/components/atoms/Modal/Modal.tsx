@@ -75,7 +75,8 @@ function Modal({
                                 width="auto"
                                 volume={0.1}
                                 playing={true}
-                                controls={true}
+                                controls={false}
+                                light={true}
                             />
                         ) : (
                             <Cover
@@ -111,7 +112,8 @@ function Modal({
                                 width="auto"
                                 volume={0.1}
                                 playing={true}
-                                controls={true}
+                                controls={false}
+                                light={true}
                             />
                         ) : (
                             <Cover

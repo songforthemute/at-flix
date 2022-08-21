@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div<{ bg: string }>`
+    margin: 0 auto;
     background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 1)),
         url(${(props) => props.bg});
     padding: 100px 60px;
@@ -8,8 +9,11 @@ export const Wrapper = styled.div<{ bg: string }>`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
-    @media screen and (max-width: 425px) {
+    @media screen and (max-width: 768px) {
         padding: 100px 40px;
+    }
+    @media screen and (max-width: 425px) {
+        padding: 45px 30px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -25,8 +29,8 @@ export const Container = styled.div`
         @media screen and (max-width: 768px) {
             height: 450px;
         }
-        @media screen and (max-width: 375px) {
-            height: 400px;
+        @media screen and (max-width: 425px) {
+            display: none;
         }
     }
 `;
@@ -39,7 +43,6 @@ export const Title = styled.h2`
     font-size: 28px;
     @media screen and (max-width: 425px) {
         font-size: 24px;
-        margin-top: 0;
     }
 `;
 

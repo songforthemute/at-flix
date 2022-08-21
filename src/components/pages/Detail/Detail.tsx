@@ -7,7 +7,7 @@ import {
     InterfaceGetResult,
     InterfaceGetVideos,
 } from "../../../apis/api";
-import { getImagePath, videoUrlConverter } from "../../../libs";
+import { getImagePath, isNotMobile, videoUrlConverter } from "../../../libs";
 import { Genre, Genres, Votes } from "../../atoms/Modal/style";
 import { Container, Dating, Overview, Title, Wrapper } from "./style";
 
@@ -52,6 +52,7 @@ export default function Detail() {
                             <ReactPlayer
                                 url={videoUrl}
                                 width="auto"
+                                height={isNotMobile() ? undefined : "250px"}
                                 volume={0.1}
                                 playing={true}
                                 controls={true}
