@@ -14,7 +14,7 @@ export const Overlay = styled(motion.div)`
 export const PopUp = styled(motion.div)<{ scrolly: number }>`
     z-index: 100;
     position: absolute;
-    width: 55vw;
+    width: 50vw;
     /* height: 60vh; */
     top: ${(props) => props.scrolly + 150}px;
     left: 0;
@@ -22,15 +22,16 @@ export const PopUp = styled(motion.div)<{ scrolly: number }>`
     margin: 0 auto;
     background-color: ${(props) => props.theme.black.lighter};
     overflow: hidden;
+    @media screen and (max-width: 1440px) {
+        top: ${(props) => props.scrolly + 80}px;
+    }
     @media screen and (max-width: 768px) {
         width: 70vw;
         /* height: 65vh; */
-        top: ${(props) => props.scrolly + 100}px;
     }
     @media screen and (max-width: 425px) {
-        width: 85vw;
+        width: 80vw;
         /* height: 70vh; */
-        top: ${(props) => props.scrolly + 100}px;
     }
 `;
 
@@ -65,7 +66,7 @@ export const Container = styled.div`
     position: relative;
     top: -70px;
     margin: 20px;
-    margin-bottom: 0;
+    margin-bottom: -40px;
 `;
 
 export const Title = styled.h2`
@@ -92,6 +93,7 @@ export const Genre = styled.span`
     display: inline-block;
     padding: 2px 3px;
     margin: 10px 2px;
+    margin-bottom: 15px;
     background-color: white;
     color: ${(props) => props.theme.black.darker};
     font-weight: 700;

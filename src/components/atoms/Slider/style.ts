@@ -5,13 +5,13 @@ export const Wrapper = styled.div`
     top: -150px;
     position: relative;
     height: auto;
-    margin-bottom: 350px;
-    @media screen and (min-width: 1024px) {
-        margin-bottom: 500px;
+    margin-bottom: 550px;
+    @media screen and (max-width: 1440px) {
+        top: -100px;
+        margin-bottom: 400px;
     }
     @media screen and (max-width: 768px) {
-        top: -100px;
-        margin-bottom: 350px;
+        top: 0px;
     }
     @media screen and (max-width: 425px) {
         top: 100px;
@@ -34,7 +34,7 @@ export const RowTitle = styled.div`
 export const Row = styled(motion.div)<{ offset: number }>`
     display: grid;
     grid-template-columns: repeat(${(props) => props.offset}, 1fr);
-    gap: 5px;
+    gap: 10px;
     position: absolute;
     width: 100%;
 `;
