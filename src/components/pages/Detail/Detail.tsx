@@ -1,7 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
+import ReactPlayer from "react-player/lazy";
 import { useMatch } from "react-router-dom";
-import { getDetail, InterfaceGetResult } from "../../../apis/api";
-import { getImagePath } from "../../../libs";
+import {
+    getDetail,
+    getVideos,
+    InterfaceGetResult,
+    InterfaceGetVideos,
+} from "../../../apis/api";
+import { getImagePath, videoUrlConverter } from "../../../libs";
 import { Genre, Genres, Votes } from "../../atoms/Modal/style";
 import { Container, Dating, Overview, Title, Wrapper } from "./style";
 
@@ -12,6 +18,17 @@ export default function Detail() {
         ["search", `${match?.params.id}`],
         () => getDetail(match?.params.type!, Number(match?.params.id))
     );
+
+    const { data: videoData } = useQuery<InterfaceGetVideos>(
+        match?.params.type! === "movie"
+            ? ["movies", `${match?.params.id}`]
+            : ["series", `${match?.params.id}`],
+        match?.params.type! === "movie"
+            ? () => getVideos("movie", match?.params.id!)
+            : () => getVideos("tv", match?.params.id!)
+    );
+
+    const videoUrl = videoUrlConverter(videoData?.results[0]?.key);
 
     return (
         <>
@@ -31,19 +48,27 @@ export default function Detail() {
                         />
                     </Container>
                     <Container>
+                        {videoUrl ? (
+                            <ReactPlayer
+                                url={videoUrl}
+                                width="auto"
+                                volume={0.1}
+                                playing={true}
+                                controls={true}
+                            />
+                        ) : null}
                         <Title>{data?.title || data?.name}</Title>
                         <Dating>
-                            Release :{" "}
                             {data?.release_date || data?.first_air_date}
                         </Dating>
                         <Genres>
-                            Genres :
+                            장르 :
                             {data?.genres.map((g) => (
                                 <Genre key={g.id}>{g.name}</Genre>
                             ))}
                         </Genres>
                         <div>
-                            Score : <Votes>{data?.vote_average!} / 10.00</Votes>
+                            평가 : <Votes>{data?.vote_average!} / 10.00</Votes>
                         </div>
                         <Overview>{data?.overview}</Overview>
                     </Container>

@@ -19,6 +19,7 @@ export const Wrapper = styled.div<{ bg: string }>`
 
 export const Container = styled.div`
     padding: 10px;
+    margin: 0 auto;
     img {
         width: auto;
         @media screen and (max-width: 768px) {
@@ -32,7 +33,8 @@ export const Container = styled.div`
 
 export const Title = styled.h2`
     margin: 10px auto;
-    margin-bottom: 20px;
+    margin-top: 20px;
+    /* margin-bottom: 10px; */
     font-weight: 700;
     font-size: 28px;
     @media screen and (max-width: 425px) {
@@ -41,7 +43,10 @@ export const Title = styled.h2`
     }
 `;
 
-export const Dating = styled.div``;
+export const Dating = styled.div`
+    font-style: italic;
+    margin-bottom: 15px;
+`;
 
 export const Overview = styled.p`
     margin: 20px 0;

@@ -1,6 +1,12 @@
 import { useNavigate } from "react-router-dom";
-import { genres, getImagePath } from "../../../libs";
-import { InterfaceMovie, InterfaceSeries } from "../../../apis/api";
+import { genres, getImagePath, videoUrlConverter } from "../../../libs";
+import {
+    getVideos,
+    InterfaceGetVideos,
+    InterfaceMovie,
+    InterfaceSeries,
+} from "../../../apis/api";
+import ReactPlayer from "react-player/lazy";
 import {
     Cover,
     modalVariants,
@@ -8,12 +14,13 @@ import {
     PopUp,
     Title,
     Overview,
-    Container,
+    DetialContainer,
     Genre,
     Badges,
     Genres,
     Votes,
 } from "./style";
+import { useQuery } from "@tanstack/react-query";
 
 interface InterfaceModalProps {
     programId: string;
@@ -28,6 +35,15 @@ function Modal({
     movieData,
     seriesData,
 }: InterfaceModalProps) {
+    const { data } = useQuery<InterfaceGetVideos>(
+        movieData ? ["movies", `${programId}`] : ["series", `${programId}`],
+        movieData
+            ? () => getVideos("movie", programId)
+            : () => getVideos("tv", programId)
+    );
+
+    const videoUrl = videoUrlConverter(data?.results[0]?.key);
+
     const navigate = useNavigate();
     function onClickOverlay() {
         navigate(-1);
@@ -53,14 +69,25 @@ function Modal({
                 {movieData ? (
                     // 무비 데이터 케이스
                     <>
-                        <Cover
-                            bg={getImagePath(
-                                movieData.backdrop_path! ||
-                                    movieData.poster_path!,
-                                "w500"
-                            )}
-                        />
-                        <Container>
+                        {videoUrl ? (
+                            <ReactPlayer
+                                url={videoUrl}
+                                width="auto"
+                                volume={0.1}
+                                playing={true}
+                                controls={true}
+                            />
+                        ) : (
+                            <Cover
+                                bg={getImagePath(
+                                    movieData.backdrop_path! ||
+                                        movieData.poster_path!,
+                                    "w500"
+                                )}
+                            />
+                        )}
+
+                        <DetialContainer>
                             <Title>{movieData?.title}</Title>
                             <Badges>
                                 <Genres>
@@ -73,19 +100,30 @@ function Modal({
                                 </Votes>
                             </Badges>
                             <Overview>{movieData?.overview}</Overview>
-                        </Container>
+                        </DetialContainer>
                     </>
                 ) : (
                     // 시리즈 데이터 케이스
                     <>
-                        <Cover
-                            bg={getImagePath(
-                                seriesData!.backdrop_path! ||
-                                    seriesData!.poster_path!,
-                                "w500"
-                            )}
-                        />
-                        <Container>
+                        {videoUrl ? (
+                            <ReactPlayer
+                                url={videoUrl}
+                                width="auto"
+                                volume={0.1}
+                                playing={true}
+                                controls={true}
+                            />
+                        ) : (
+                            <Cover
+                                bg={getImagePath(
+                                    seriesData!.backdrop_path! ||
+                                        seriesData!.poster_path!,
+                                    "w500"
+                                )}
+                            />
+                        )}
+
+                        <DetialContainer>
                             <Title>
                                 {seriesData?.name || seriesData?.title}
                             </Title>
@@ -100,7 +138,7 @@ function Modal({
                                 </Votes>
                             </Badges>
                             <Overview>{seriesData?.overview}</Overview>
-                        </Container>
+                        </DetialContainer>
                     </>
                 )}
             </PopUp>

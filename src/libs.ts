@@ -49,3 +49,10 @@ export const genres: { [key: string]: string } = {
     "10767": "토크",
     "10768": "전쟁",
 };
+
+export function videoUrlConverter(key?: string) {
+    return key
+        ? `https://www.youtube.com/watch?v=${key}`
+        : // ?  `https://www.youtube.com/embed/${key}?showinfo=0&enablejsapi=1&origin=http://localhost:3000`
+          null;
+}

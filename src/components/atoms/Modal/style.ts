@@ -62,18 +62,18 @@ export const Cover = styled.div<{ bg: string }>`
     }
 `;
 
-export const Container = styled.div`
+export const DetialContainer = styled.div`
     position: relative;
-    top: -70px;
+    top: 0;
     margin: 20px;
-    margin-bottom: -40px;
+    margin-bottom: 30px;
 `;
 
 export const Title = styled.h2`
     color: ${(props) => props.theme.white.lighter};
     font-size: 24px;
     font-weight: 700;
-    padding-bottom: 30px;
+    padding-bottom: 10px;
 `;
 
 export const Overview = styled.p`

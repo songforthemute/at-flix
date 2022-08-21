@@ -164,3 +164,26 @@ export function searchProgram(keyword: string) {
         `${BASE_URL}/search/multi?api_key=${API_KEY}&language=ko-KR&query=${keyword}&page=1`
     ).then((response) => response.json());
 }
+
+export interface InterfaceGetVideosResults {
+    iso_639_1: string;
+    iso_3166_1: string;
+    name: string;
+    key: string;
+    site: string;
+    size: number;
+    type: string;
+    official: boolean;
+    published_at: string;
+    id: string;
+}
+export interface InterfaceGetVideos {
+    id: number;
+    results: InterfaceGetVideosResults[];
+}
+
+export function getVideos(genre: string, id: string) {
+    return fetch(
+        `${BASE_URL}/${genre}/${id}/videos?api_key=${API_KEY}&language=ko-KR&page=1`
+    ).then((response) => response.json());
+}
