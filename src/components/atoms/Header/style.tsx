@@ -173,7 +173,7 @@ export const ErrMessage = styled(motion.div)`
     background-color: rgba(0, 0, 0, 0.5);
     padding: 10px;
     border-radius: 100px;
-    width: 400px;
+    width: 300px;
 `;
 
 export const errMessageVariants: Variants = {

@@ -20,7 +20,7 @@ import {
     useAnimation,
     useScroll,
 } from "framer-motion";
-import { Link, useMatch, useNavigate } from "react-router-dom";
+import { Link, useLocation, useMatch, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -32,24 +32,31 @@ export default function Header() {
     const isMatchHome = useMatch("/");
     const isMatchSeries = useMatch("series");
     const navigate = useNavigate();
+    const location = useLocation();
 
+    // 리액트 훅 폼
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm<InterfaceForm>();
 
-    console.log(errors.keyword);
-
     const onValid = (data: InterfaceForm) => {
         navigate(`${process.env.PUBLIC_URL}/search?keyword=${data.keyword}`);
     };
 
+    // 검색창 오픈
     const [searchOpen, setSearchOpen] = useState(false);
     function _onClickSearch() {
         setSearchOpen((prev) => !prev);
     }
 
+    // 로케이션 이동 시 검색창 자동 닫기
+    useEffect(() => {
+        setSearchOpen(false);
+    }, [location]);
+
+    // 애니메이션을 위한 스크롤 변화 감지
     const { scrollY } = useScroll();
     const navAnimation = useAnimation();
 
@@ -63,6 +70,7 @@ export default function Header() {
         });
     }, [scrollY, navAnimation]);
 
+    // 로고 클릭 시
     function _onClickLogo() {
         navigate(`${process.env.PUBLIC_URL}/`);
     }
@@ -134,7 +142,7 @@ export default function Header() {
                 </Col>
             </Nav>
             <AnimatePresence>
-                {errors.keyword?.type === "minLength" && (
+                {searchOpen && errors.keyword?.type === "minLength" && (
                     <ErrMessage
                         variants={errMessageVariants}
                         initial="initial"
