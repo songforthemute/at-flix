@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/at-flix/static/js/main.bf240335.js",
+    "main.js": "/at-flix/static/js/main.f03ba37e.js",
     "reactPlayerYouTube.js": "/at-flix/static/js/reactPlayerYouTube.be54b95a.chunk.js",
     "reactPlayerSoundCloud.js": "/at-flix/static/js/reactPlayerSoundCloud.6f2db0d4.chunk.js",
     "reactPlayerVimeo.js": "/at-flix/static/js/reactPlayerVimeo.9fa2ce17.chunk.js",
@@ -15,7 +15,7 @@
     "reactPlayerFilePlayer.js": "/at-flix/static/js/reactPlayerFilePlayer.5d51de6f.chunk.js",
     "reactPlayerPreview.js": "/at-flix/static/js/reactPlayerPreview.45308e6a.chunk.js",
     "index.html": "/at-flix/index.html",
-    "main.bf240335.js.map": "/at-flix/static/js/main.bf240335.js.map",
+    "main.f03ba37e.js.map": "/at-flix/static/js/main.f03ba37e.js.map",
     "reactPlayerYouTube.be54b95a.chunk.js.map": "/at-flix/static/js/reactPlayerYouTube.be54b95a.chunk.js.map",
     "reactPlayerSoundCloud.6f2db0d4.chunk.js.map": "/at-flix/static/js/reactPlayerSoundCloud.6f2db0d4.chunk.js.map",
     "reactPlayerVimeo.9fa2ce17.chunk.js.map": "/at-flix/static/js/reactPlayerVimeo.9fa2ce17.chunk.js.map",
@@ -31,6 +31,6 @@
     "reactPlayerPreview.45308e6a.chunk.js.map": "/at-flix/static/js/reactPlayerPreview.45308e6a.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.bf240335.js"
+    "static/js/main.f03ba37e.js"
   ]
 }
