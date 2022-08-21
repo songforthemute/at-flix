@@ -2,7 +2,7 @@
     "name": "at-flix",
     "version": "1.0.0",
     "private": false,
-    "homepage": "https://songforthemute.github.io/at-flix",
+    "homepage": "https://at-flix.netlify.app",
     "dependencies": {
         "@tanstack/react-query": "^4.0.10",
         "@tanstack/react-query-devtools": "^4.0.10",
