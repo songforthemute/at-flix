@@ -47,7 +47,7 @@ export default function Home() {
 
     const navigate = useNavigate();
     const moveToBanner = (movieId: string) => {
-        navigate(`/movie/${movieId}`);
+        navigate(`${process.env.PUBLIC_URL}/movie/${movieId}`);
     };
 
     return (

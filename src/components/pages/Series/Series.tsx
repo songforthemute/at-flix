@@ -42,7 +42,7 @@ export default function Series() {
     const { scrollY } = useScroll();
     const navigate = useNavigate();
     const moveToBanner = (seriesId: string) => {
-        navigate(`/series/${seriesId}`);
+        navigate(`${process.env.PUBLIC_URL}/series/${seriesId}`);
     };
 
     return (

@@ -10,13 +10,28 @@ function App() {
         <BrowserRouter>
             <Header />
             <Routes>
-                <Route path="/series" element={<Series />}>
-                    <Route path="/series/:seriesId" element={<Home />} />
+                <Route
+                    path={`${process.env.PUBLIC_URL}/series`}
+                    element={<Series />}
+                >
+                    <Route
+                        path={`${process.env.PUBLIC_URL}/series/:seriesId`}
+                        element={<Home />}
+                    />
                 </Route>
-                <Route path="/search/:type/:id" element={<Detail />} />
-                <Route path="/search" element={<Search />} />
-                <Route path={"/"} element={<Home />}>
-                    <Route path="/movie/:movieId" element={<Home />} />
+                <Route
+                    path={`${process.env.PUBLIC_URL}/search/:type/:id`}
+                    element={<Detail />}
+                />
+                <Route
+                    path={`${process.env.PUBLIC_URL}/search`}
+                    element={<Search />}
+                />
+                <Route path={`${process.env.PUBLIC_URL}/`} element={<Home />}>
+                    <Route
+                        path={`${process.env.PUBLIC_URL}/movie/:movieId`}
+                        element={<Home />}
+                    />
                 </Route>
             </Routes>
         </BrowserRouter>

@@ -42,7 +42,7 @@ export default function Header() {
     console.log(errors.keyword);
 
     const onValid = (data: InterfaceForm) => {
-        navigate(`/search?keyword=${data.keyword}`);
+        navigate(`${process.env.PUBLIC_URL}/search?keyword=${data.keyword}`);
     };
 
     const [searchOpen, setSearchOpen] = useState(false);
@@ -64,7 +64,7 @@ export default function Header() {
     }, [scrollY, navAnimation]);
 
     function _onClickLogo() {
-        navigate("/");
+        navigate(`${process.env.PUBLIC_URL}/`);
     }
 
     return (
