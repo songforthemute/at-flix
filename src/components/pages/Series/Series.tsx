@@ -7,7 +7,7 @@ import {
     getTopRatedSeries,
     InterfaceGetSeries,
 } from "../../../apis/seriesApi";
-import { getImagePath } from "../../../libs";
+import { getImagePath } from "../../../libs/libs";
 import Modal from "../../atoms/Modal/Modal";
 import Slider from "../../atoms/Slider/Slider";
 import { Banner, Loading, Overview, Title, Wrapper } from "../Home/style";

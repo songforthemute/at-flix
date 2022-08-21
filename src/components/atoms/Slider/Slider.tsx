@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { InterfaceMovie } from "../../../apis/movieApi";
 import { InterfaceSeries } from "../../../apis/seriesApi";
-import { getImagePath, isNotMobile, programTypes } from "../../../libs";
+import { getImagePath, isNotMobile, programTypes } from "../../../libs/libs";
 import {
     Button,
     Detail,

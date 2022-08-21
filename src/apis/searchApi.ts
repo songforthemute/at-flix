@@ -1,4 +1,4 @@
-import { API_KEY, BASE_URL } from "../libs";
+import { API_KEY, BASE_URL } from "../libs/libs";
 
 export interface InterfaceGetResult {
     adult: boolean;
@@ -44,11 +44,13 @@ export interface InterfaceGetResult {
     overview: string;
 }
 
-export function getDetail(type: string, Id: number) {
-    return fetch(
-        `${BASE_URL}/${type}/${Id}?api_key=${API_KEY}&language=ko-KR`
-    ).then((response) => response.json());
-}
+export const getDetail = async (type: string, Id: number) => {
+    return await (
+        await fetch(
+            `${BASE_URL}/${type}/${Id}?api_key=${API_KEY}&language=ko-KR`
+        )
+    ).json();
+};
 
 export interface InterfaceSearchResults {
     backdrop_path: string;
@@ -76,11 +78,13 @@ export interface InterfaceSearch {
     results: InterfaceSearchResults[];
 }
 
-export function searchProgram(keyword: string) {
-    return fetch(
-        `${BASE_URL}/search/multi?api_key=${API_KEY}&language=ko-KR&query=${keyword}&page=1`
-    ).then((response) => response.json());
-}
+export const searchProgram = async (keyword: string) => {
+    return await (
+        await fetch(
+            `${BASE_URL}/search/multi?api_key=${API_KEY}&language=ko-KR&query=${keyword}&page=1`
+        )
+    ).json();
+};
 
 export interface InterfaceGetVideosResults {
     iso_639_1: string;
@@ -99,8 +103,10 @@ export interface InterfaceGetVideos {
     results: InterfaceGetVideosResults[];
 }
 
-export function getVideos(genre: string, id: string) {
-    return fetch(
-        `${BASE_URL}/${genre}/${id}/videos?api_key=${API_KEY}&language=ko-KR&page=1`
-    ).then((response) => response.json());
-}
+export const getVideos = async (genre: string, id: string) => {
+    return await (
+        await fetch(
+            `${BASE_URL}/${genre}/${id}/videos?api_key=${API_KEY}&language=ko-KR&page=1`
+        )
+    ).json();
+};

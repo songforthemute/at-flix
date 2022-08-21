@@ -7,7 +7,11 @@ import {
     InterfaceGetResult,
     InterfaceGetVideos,
 } from "../../../apis/searchApi";
-import { getImagePath, isNotMobile, videoUrlConverter } from "../../../libs";
+import {
+    getImagePath,
+    isNotMobile,
+    videoUrlConverter,
+} from "../../../libs/libs";
 import { Genre, Genres, Votes } from "../../atoms/Modal/style";
 import { Container, Dating, Overview, Title, Wrapper } from "./style";
 

@@ -4,11 +4,11 @@ const IMG_URL = process.env.REACT_APP_IMG_URL;
 
 export type programTypes = "movie" | "series";
 
-export function getImagePath(id: string, format?: string) {
+export const getImagePath = (id: string, format?: string) => {
     return `${IMG_URL}/${format ? format : "original"}/${id}`;
-}
+};
 
-export function isNotMobile() {
+export const isNotMobile = () => {
     const { userAgent } = window.navigator;
 
     if (
@@ -20,7 +20,7 @@ export function isNotMobile() {
     } else {
         return true;
     }
-}
+};
 
 export const genres: { [key: string]: string } = {
     "28": "액션",
@@ -52,9 +52,9 @@ export const genres: { [key: string]: string } = {
     "10768": "전쟁",
 };
 
-export function videoUrlConverter(key?: string) {
+export const videoUrlConverter = (key?: string) => {
     return key
         ? `https://www.youtube.com/watch?v=${key}`
         : // ?  `https://www.youtube.com/embed/${key}?showinfo=0&enablejsapi=1&origin=http://localhost:3000`
           null;
-}
+};

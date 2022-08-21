@@ -1,4 +1,4 @@
-import { API_KEY, BASE_URL } from "../libs";
+import { API_KEY, BASE_URL } from "../libs/libs";
 
 export interface InterfaceSeries {
     id: number;
@@ -22,20 +22,26 @@ export interface InterfaceGetSeries {
     total_results: number;
 }
 
-export function getOnTheAirSeries() {
-    return fetch(
-        `${BASE_URL}/tv/on_the_air?api_key=${API_KEY}&language=ko-KR&page=1`
-    ).then((response) => response.json());
-}
+export const getOnTheAirSeries = async () => {
+    return await (
+        await fetch(
+            `${BASE_URL}/tv/on_the_air?api_key=${API_KEY}&language=ko-KR&page=1`
+        )
+    ).json();
+};
 
-export function getPopularSeries() {
-    return fetch(
-        `${BASE_URL}/tv/popular?api_key=${API_KEY}&language=ko-KR&page=1`
-    ).then((response) => response.json());
-}
+export const getPopularSeries = async () => {
+    return await (
+        await fetch(
+            `${BASE_URL}/tv/popular?api_key=${API_KEY}&language=ko-KR&page=1`
+        )
+    ).json();
+};
 
-export function getTopRatedSeries() {
-    return fetch(
-        `${BASE_URL}/tv/top_rated?api_key=${API_KEY}&language=ko-KR&page=1`
-    ).then((response) => response.json());
-}
+export const getTopRatedSeries = async () => {
+    return await (
+        await fetch(
+            `${BASE_URL}/tv/top_rated?api_key=${API_KEY}&language=ko-KR&page=1`
+        )
+    ).json();
+};

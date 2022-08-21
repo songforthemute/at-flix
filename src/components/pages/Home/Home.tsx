@@ -7,7 +7,7 @@ import {
     getUpcomingMovies,
     InterfaceGetMovies,
 } from "../../../apis/movieApi";
-import { getImagePath } from "../../../libs";
+import { getImagePath } from "../../../libs/libs";
 
 import Modal from "../../atoms/Modal/Modal";
 import Slider from "../../atoms/Slider/Slider";

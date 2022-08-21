@@ -1,4 +1,4 @@
-import { API_KEY, BASE_URL } from "../libs";
+import { API_KEY, BASE_URL } from "../libs/libs";
 
 export interface InterfaceMovie {
     id: number;
@@ -24,20 +24,26 @@ export interface InterfaceGetMovies {
     total_results: number;
 }
 
-export function getNowPlayingMovies() {
-    return fetch(
-        `${BASE_URL}/movie/now_playing?api_key=${API_KEY}&language=ko-KR&page=1&region=kr`
-    ).then((response) => response.json());
-}
+export const getNowPlayingMovies = async () => {
+    return await (
+        await fetch(
+            `${BASE_URL}/movie/now_playing?api_key=${API_KEY}&language=ko-KR&page=1&region=kr`
+        )
+    ).json();
+};
 
-export function getTopRatedMovies() {
-    return fetch(
-        `${BASE_URL}/movie/top_rated?api_key=${API_KEY}&language=ko-KR&page=1&region=kr`
-    ).then((response) => response.json());
-}
+export const getTopRatedMovies = async () => {
+    return await (
+        await fetch(
+            `${BASE_URL}/movie/top_rated?api_key=${API_KEY}&language=ko-KR&page=1&region=kr`
+        )
+    ).json();
+};
 
-export function getUpcomingMovies() {
-    return fetch(
-        `${BASE_URL}/movie/upcoming?api_key=${API_KEY}&language=ko-KR&page=1&region=kr`
-    ).then((response) => response.json());
-}
+export const getUpcomingMovies = async () => {
+    return await (
+        await fetch(
+            `${BASE_URL}/movie/upcoming?api_key=${API_KEY}&language=ko-KR&page=1&region=kr`
+        )
+    ).json();
+};

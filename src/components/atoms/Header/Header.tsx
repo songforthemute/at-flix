@@ -47,9 +47,9 @@ export default function Header() {
 
     // 검색창 오픈
     const [searchOpen, setSearchOpen] = useState(false);
-    function _onClickSearch() {
+    const _onClickSearch = () => {
         setSearchOpen((prev) => !prev);
-    }
+    };
 
     // 로케이션 이동 시 검색창 자동 닫기
     useEffect(() => {
@@ -71,9 +71,9 @@ export default function Header() {
     }, [scrollY, navAnimation]);
 
     // 로고 클릭 시
-    function _onClickLogo() {
+    const _onClickLogo = () => {
         navigate(`${process.env.PUBLIC_URL}/`);
-    }
+    };
 
     return (
         <>

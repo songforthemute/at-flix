@@ -5,7 +5,7 @@ import Series from "./components/pages/Series/Series";
 import Search from "./components/pages/Search/Search";
 import Detail from "./components/pages/Detail/Detail";
 
-function App() {
+export default function App() {
     return (
         <BrowserRouter>
             <Header />
@@ -37,5 +37,3 @@ function App() {
         </BrowserRouter>
     );
 }
-
-export default App;

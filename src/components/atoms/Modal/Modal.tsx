@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { genres, getImagePath, videoUrlConverter } from "../../../libs";
+import { genres, getImagePath, videoUrlConverter } from "../../../libs/libs";
 import { getVideos, InterfaceGetVideos } from "../../../apis/searchApi";
 import ReactPlayer from "react-player/lazy";
 import {
@@ -26,7 +26,7 @@ interface InterfaceModalProps {
     seriesData?: InterfaceSeries;
 }
 
-function Modal({
+export default function Modal({
     programId,
     scrolly,
     movieData,
@@ -42,9 +42,9 @@ function Modal({
     const videoUrl = videoUrlConverter(data?.results[0]?.key);
 
     const navigate = useNavigate();
-    function onClickOverlay() {
+    const onClickOverlay = () => {
         navigate(-1);
-    }
+    };
 
     return (
         <>
@@ -144,5 +144,3 @@ function Modal({
         </>
     );
 }
-
-export default Modal;
