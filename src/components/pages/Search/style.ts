@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { motion, Variants } from "framer-motion";
 
-export const Container = styled.div`
+export const Wrapper = styled.div`
     padding: 60px;
     margin-top: 40px;
     background-color: black;

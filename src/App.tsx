@@ -4,6 +4,7 @@ import Home from "./components/pages/Home/Home";
 import Series from "./components/pages/Series/Series";
 import Search from "./components/pages/Search/Search";
 import Detail from "./components/pages/Detail/Detail";
+import Footer from "./components/atoms/Footer/Footer";
 
 export default function App() {
     return (
@@ -34,6 +35,7 @@ export default function App() {
                     />
                 </Route>
             </Routes>
+            <Footer />
         </BrowserRouter>
     );
 }

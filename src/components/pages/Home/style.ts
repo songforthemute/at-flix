@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
     background-color: black;
-    height: 200vh;
+    padding-bottom: 100px;
 `;
 
 export const Loading = styled.div`
