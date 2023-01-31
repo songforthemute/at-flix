@@ -38,11 +38,12 @@ export const Col = styled.div`
 `;
 
 export const Logo = styled(motion.svg)`
-    cursor: pointer;
     width: 72px;
     height: 54px;
     margin-right: 20px;
     fill: ${(props) => props.theme.yellow};
+    cursor: pointer;
+
     path {
         /* stroke-width: 4px;
         stroke: white; */
@@ -51,20 +52,14 @@ export const Logo = styled(motion.svg)`
 
 export const logoVariants: Variants = {
     initial: {
-        rotateZ: 0,
-        transition: {
-            type: "spring",
-            bounce: 0.95,
-            duration: 3.5,
-        },
+        opacity: 1,
+        scale: 1,
     },
     active: {
-        rotateZ: [0, -150, -45, -135, -60, -120, -75, -105, -95],
+        scaleX: 1.1,
+        opacity: 0.5,
         transition: {
-            // repeat: 2,
-            type: "spring",
-            bounce: 0.75,
-            duration: 3.5,
+            ease: "easeInOut",
         },
     },
 };

@@ -21,11 +21,13 @@ export const Wrapper = styled.div`
 
 export const RowTitle = styled.div`
     margin-left: 60px;
-    margin-bottom: 25px;
+    margin-bottom: 24px;
     font-size: 20px;
-    font-weight: 700;
+    font-weight: 600;
+    /* letter-spacing: 5px; */
     font-style: italic;
     text-transform: uppercase;
+    color: ${(props) => props.theme.yellow};
     @media screen and (max-width: 425px) {
         font-size: 16px;
     }
@@ -128,25 +130,27 @@ export const detailVariants: Variants = {
 
 export const Button = styled.button<{ right?: string; left?: string }>`
     position: absolute;
-    top: -10px;
+    top: -7.5px;
     left: ${(props) => (props.left ? props.left : "initial")};
     right: ${(props) => (props.right ? props.right : "initial")};
     z-index: 2;
     border: none;
     cursor: pointer;
-    padding: 4px;
-    border-radius: 50%;
+    padding: 0.5px;
     margin: 0 5px;
     font-size: 40px;
-    font-weight: 700;
     background-color: transparent;
     color: ${(props) => props.theme.black.lighter};
-    transition: all 0.35s ease-in-out;
+    transition: all 0.25s;
     &:hover,
+    &:focus,
     &:active {
-        scale: 1.2;
+        scale: 1.1;
         color: ${(props) => props.theme.white.lighter};
-        box-shadow: inset 3px 3px 10px -5px rgba(255, 255, 255, 0.5),
-            3px 3px 10px -5px rgba(255, 255, 255, 0.5);
+    }
+
+    &:focus {
+        outline: none;
+        border-bottom: 1.5px solid white;
     }
 `;

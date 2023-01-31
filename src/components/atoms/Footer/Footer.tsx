@@ -13,6 +13,7 @@ export default function Footer() {
                 <ReturnBtn onClick={_onClick}>&larr;</ReturnBtn>
             </Container>
             <Container>
+                <Copy>Powered by TMDB.</Copy>
                 <Copy>
                     &copy; {new Date().getFullYear()} At Flix. All rights
                     reserved.

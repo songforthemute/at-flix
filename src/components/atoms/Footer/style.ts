@@ -13,24 +13,27 @@ export const Container = styled.div`
 `;
 
 export const ReturnBtn = styled.button`
-    border-radius: 80px;
     width: 45px;
     height: 45px;
     border: 0;
     background-color: transparent;
     color: ${(props) => props.theme.white.darker};
-    transition: all 0.35s ease-in-out;
+    transition: all 0.25s;
     cursor: pointer;
     &:hover,
+    &:focus,
     &:active {
-        scale: 1.2;
-        color: ${(props) => props.theme.white.lighter};
-        box-shadow: inset 3px 3px 10px -5px rgba(255, 255, 255, 0.5),
-            3px 3px 10px -5px rgba(255, 255, 255, 0.5);
+        scale: 1.5;
+        color: ${(props) => props.theme.yellow};
+    }
+
+    &:focus {
+        outline: none;
     }
 `;
 
 export const Copy = styled.div`
     text-align: center;
-    color: ${(props) => props.theme.black.lighter};
+    padding: 4px 0;
+    color: ${(props) => props.theme.white.darker};
 `;
