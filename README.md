@@ -4,9 +4,9 @@
 
 이 프로젝트는 Public API를 이용한 **영화 & TV 시리즈 웹 애플리케이션**으로, Netflix의 랜딩 페이지에서 영감을 받아 진행하게 되었으며, React.js를 기반으로 개발한 웹 애플리케이션입니다.
 
--   Project Deployment : [At-flix]("https://songforthemute.github.io/at-flix")
+-   Project Deployment : [At-flix](https://songforthemute.github.io/at-flix)
 
--   미디엄 블로그 링크 : [https://medium.com/@songforthemute]("https://medium.com/@songforthemute")
+-   미디엄 블로그 링크 : [https://medium.com/@songforthemute](https://medium.com/@songforthemute)
 
 ---
 
@@ -68,7 +68,7 @@
 
 ## 3. 프로젝트 상세
 
--   이 프로젝트의 프론트엔드 파트는 `React.js` 라이브러리를 이용해 개발하였습니다. API는 `The Movie Database`에서 제공받았습니다.
+-   이 프로젝트의 프론트엔드 파트는 `React.js` 라이브러리를 이용해 개발하였습니다. API는 [The Movie Database](https://www.themoviedb.org)에서 제공받았습니다.
 
 -   프론트엔드 파트에 **아토믹 디자인 시스템(Atomic Design System)**에 기반한 아키텍처 적용을 시도했습니다.
 
